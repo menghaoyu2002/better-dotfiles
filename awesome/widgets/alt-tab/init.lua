@@ -30,7 +30,7 @@ local _M = {}
 -- settings
 
 _M.settings = {
-	preview_box_delay = 50,
+	preview_box_delay = 0,
 }
 
 -- Create a wibox to contain all the client-widgets
@@ -315,6 +315,10 @@ function _M.preview()
 		
         _M.preview_widgets[i] = container
 
+        -- Add mouse handler
+		_M.preview_widgets[i]:connect_signal("mouse::enter", function()
+			_M.cycle(leftRightTabToAltTabIndex[i] - _M.altTabIndex)
+		end)
 	end
 
 	--layout
