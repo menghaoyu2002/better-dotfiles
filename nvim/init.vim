@@ -79,7 +79,8 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
-colorscheme catppuccin-mocha
+set termguicolors
+colorscheme catppuccin
 
 lua require("config")
 

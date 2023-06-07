@@ -36,11 +36,10 @@ require('dashboard').setup({
           key = 'd',
         },
       },
-    },
+  }
 })
 require("nvim-autopairs").setup {}
-require'hop'.setup()
-
+require('hop').setup()
 vim.g.coq_settings = {
     auto_start = 'shut-up'
 }
@@ -67,3 +66,4 @@ end, {remap=true})
 vim.keymap.set('', ';', function()
   hop.hint_anywhere()
 end, {remap=true})
+
