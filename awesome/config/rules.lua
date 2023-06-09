@@ -86,6 +86,9 @@ rules = {
     { rule = { class = "Lxappearance" },
       properties = { floating  = true },
     }, 
+    { rule = { class = "discord" },
+      properties = { floating  = true },
+    }, 
     { rule = { class = "Cisco AnyConnect Secure Mobility Client" },
       properties = { floating = true }, 
       callback = function (c)
