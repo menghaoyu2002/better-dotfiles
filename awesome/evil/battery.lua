@@ -19,10 +19,9 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
     local capacities = {}
 
     local charging = false
-    for s in stdout:gmatch("[^\r\n]+") do
+    for s in stdout:gmatch("Battery 0: [^\r\n]+") do
         local status, charge_str = string.match(s, '(%a+%s*%a*), (%d?%d?%d)%%')
         if status and status ~= 'Discharging' then charging = true end
-
 
         if status ~= nil then
             table.insert(battery_info, {status = status, charge = tonumber(charge_str)})
