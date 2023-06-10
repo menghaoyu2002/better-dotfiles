@@ -44,11 +44,7 @@ vim.g.coq_settings = {
   auto_start = 'shut-up'
 }
 
--- LSP setup
-require 'lspconfig'.lua_ls.setup {}
-
 -- hop keybinds
--- -- place this in one of your configuration file(s)
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 vim.keymap.set('', 'f', function()
@@ -66,3 +62,14 @@ end, { remap = true })
 vim.keymap.set('', ';', function()
   hop.hint_anywhere()
 end, { remap = true })
+
+-- LSP setup
+require 'lspconfig'.lua_ls.setup {}
+require'lspconfig'.gopls.setup{}
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.cssls.setup{}
+require'lspconfig'.html.setup{}
+require'lspconfig'.bashls.setup{}
+require'lspconfig'.clangd.setup{}
+require'lspconfig'.jsonls.setup{}
+require'lspconfig'.golangci_lint_ls.setup{}
