@@ -122,9 +122,9 @@ rules = {
       },
     },
     { rule = { instance = "floating_terminal" },
-      properties = { 
-        floating  = true, 
-      },
+      properties = {
+        floating  = true,
+      }
     }, 
     { rule = { class = "Spotify" },
       properties = { 
