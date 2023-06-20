@@ -6,6 +6,7 @@ local naughty = require("naughty")
 
 local button = require("lib.button")
 
+local modkey = "Mod4"
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
@@ -47,7 +48,7 @@ taglist.init = function(s)
     local taglist = awful.widget.taglist {
         screen = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons, 
+        buttons = taglist_buttons,
         widget_template = {
             {
                 nil,
@@ -67,8 +68,7 @@ taglist.init = function(s)
                 },
                 layout = wibox.layout.align.vertical
             },
-            id     = 'background_role',
-            widget = wibox.container.background,
+            id     = 'background_role', widget = wibox.container.background,
             create_callback = function(item, tag, index, _)
                 update_tag(item, tag, index)
 
@@ -76,8 +76,10 @@ taglist.init = function(s)
                 item:connect_signal("mouse::enter", function() 
                     -- change cursor
                     local wb = mouse.current_wibox
-                    old_cursor, old_wibox = wb.cursor, wb
-                    wb.cursor = "hand2" 
+                    if wb then
+                        old_cursor, old_wibox = wb.cursor, wb
+                        wb.cursor = "hand2" 
+                    end
                 end)
                 item:connect_signal("mouse::leave", function() 
                     -- reset cursor
@@ -93,11 +95,11 @@ taglist.init = function(s)
 
     local container = wibox.widget {
         taglist, 
-        button.create_text(beautiful.fg_dark, beautiful.fg_normal, "󰐕", "Fira Mono 12", function() 
-            for _, tag in pairs(root.tags()) do
+        button.create_text(beautiful.fg_dark, beautiful.fg_normal, "󰐕", "Fira Mono 12", function()
+            for _, tag in pairs(awful.screen.focused().tags) do
                 if #tag:clients() == 0 then
                 tag:view_only()
-                break 
+                break
                 end
             end
         end),

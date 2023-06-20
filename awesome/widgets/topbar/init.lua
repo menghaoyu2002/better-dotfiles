@@ -57,7 +57,7 @@ awful.screen.connect_for_each_screen(function(s)
         spacing = dpi(10),
         expand = "none",
         {   -- Left
-            -- widget(session), 
+            -- widget(session),
             bar_taglist,
             spacing = dpi(6),
             layout = wibox.layout.fixed.horizontal, 

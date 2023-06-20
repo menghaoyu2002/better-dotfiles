@@ -20,7 +20,6 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
-                
     awful.key({ altkey,           }, "Tab",
       function ()
           apps.switcher.switch( 1, "Mod1", "Alt_L", "Shift", "Tab")
@@ -67,7 +66,7 @@ keys.globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey, }, "Return", function () awful.spawn(user.terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "Return", function () awful.spawn(user.floating_terminal, { floating = true, placement = awful.placement.centered, width = 1200, height = 750}) end,
+    awful.key({ modkey, "Shift" }, "Return", function () awful.spawn(user.floating_terminal,{ floating = true, placement = awful.placement.centered, width = 1200, height = 750}) end,
               {description = "open a floating terminal", group = "launcher"}),
     awful.key({ modkey, }, "space", function () awful.spawn("rofi -show run") end,
               {description = "open rofi", group = "launcher"}),
@@ -191,6 +190,8 @@ keys.clientkeys = gears.table.join(
         end,
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ altkey    }, "F4",      function (c) c:kill() end,
+              {description = "close", group = "client"}),
+    awful.key({ modkey }, "q",      function (c) c:kill() end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
