@@ -176,6 +176,7 @@ for i = 1, 9 do
                           if tag then
                               client.focus:move_to_tag(tag)
                           end
+                          tag:view_only()
                      end
                   end,
                   {description = "move focused client to tag #"..i, group = "tag"})
