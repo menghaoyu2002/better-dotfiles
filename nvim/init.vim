@@ -26,7 +26,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
 set number
-syntax on
 
 " Custom Keybinds
 inoremap kj <ESC>

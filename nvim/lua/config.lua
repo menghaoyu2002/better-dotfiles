@@ -40,6 +40,21 @@ require('dashboard').setup({
 })
 require("nvim-autopairs").setup {}
 require('hop').setup()
+require'nvim-treesitter.configs'.setup {
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+
 vim.g.coq_settings = {
   auto_start = 'shut-up'
 }
@@ -72,4 +87,3 @@ require'lspconfig'.html.setup{}
 require'lspconfig'.bashls.setup{}
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.jsonls.setup{}
-require'lspconfig'.golangci_lint_ls.setup{}
