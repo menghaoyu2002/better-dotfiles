@@ -14,32 +14,33 @@ require('dashboard').setup({
       enable = true,
     },
     shortcut = {
-      { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+      { desc = '󰊳 update', group = '@property', action = 'lazy update', key = 'u' },
       {
         icon = ' ',
         icon_hl = '@variable',
-        desc = 'Files',
-        group = 'Label',
-        action = 'Telescope find_files',
+        desc = 'files',
+        group = 'label',
+        action = 'telescope find_files',
         key = 'f',
       },
       {
-        desc = ' Apps',
-        group = 'DiagnosticHint',
-        action = 'Telescope app',
+        desc = ' apps',
+        group = 'diagnostichint',
+        action = 'telescope app',
         key = 'a',
       },
       {
         desc = ' dotfiles',
-        group = 'Number',
-        action = 'Telescope dotfiles',
+        group = 'number',
+        action = 'telescope dotfiles',
         key = 'd',
       },
     },
   }
 })
 require("nvim-autopairs").setup {}
-require('hop').setup()
+require("flash").setup()
+
 require'nvim-treesitter.configs'.setup {
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -54,29 +55,17 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+vim.keymap.set('', 's', function()
+    require("flash").jump()
+end)
+vim.keymap.set('', 'S', function()
+    require("flash").treesitter()
+end)
+
 
 vim.g.coq_settings = {
   auto_start = 'shut-up'
 }
-
--- hop keybinds
-local hop = require('hop')
-local directions = require('hop.hint').HintDirection
-vim.keymap.set('', 'f', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, { remap = true })
-vim.keymap.set('', 'F', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-end, { remap = true })
-vim.keymap.set('', 't', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-end, { remap = true })
-vim.keymap.set('', 'T', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-end, { remap = true })
-vim.keymap.set('', ';', function()
-  hop.hint_anywhere()
-end, { remap = true })
 
 -- LSP setup
 require 'lspconfig'.lua_ls.setup {}

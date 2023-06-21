@@ -1,6 +1,10 @@
 set nocompatible              " be iMproved, required
 
-set guicursor=i:block
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
+" set guicursor=i:block
 
 call plug#begin()
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
@@ -21,7 +25,10 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 Plug 'windwp/nvim-autopairs'
-Plug 'phaazon/hop.nvim'
+Plug 'folke/flash.nvim'
+Plug 'ggandor/leap.nvim'
+Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-fugitive'
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
