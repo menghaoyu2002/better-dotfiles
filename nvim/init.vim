@@ -42,10 +42,10 @@ set splitbelow
 set splitright
 
 " Split navigation
-nnoremap <C-j> <C-W><C-j>
-nnoremap <C-k> <C-W><C-k>
-nnoremap <C-l> <C-W><C-l>
-nnoremap <C-h> <C-W><C-h>
+" nnoremap <C-j> <C-W><C-j>
+" nnoremap <C-k> <C-W><C-k>
+" nnoremap <C-l> <C-W><C-l>
+" nnoremap <C-h> <C-W><C-h>
 
 " Split Resizing
 nnoremap <C-w><C-L> :vertical res -5<CR>
@@ -83,6 +83,12 @@ set shiftwidth=4
 
 set termguicolors
 colorscheme catppuccin
+
+" highlight on yank
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=150})
+augroup END
 
 lua require("config")
 
