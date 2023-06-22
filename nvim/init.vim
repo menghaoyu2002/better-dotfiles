@@ -1,10 +1,6 @@
 set nocompatible              " be iMproved, required
 
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
-
-" set guicursor=i:block
+set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 
 call plug#begin()
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
