@@ -32,6 +32,7 @@ set number
 
 " Custom Keybinds
 inoremap kj <ESC>
+let mapleader = " "
  
 " Rebind undo to ctrl + z
 nnoremap <C-z> u
@@ -42,10 +43,10 @@ set splitbelow
 set splitright
 
 " Split navigation
-" nnoremap <C-j> <C-W><C-j>
-" nnoremap <C-k> <C-W><C-k>
-" nnoremap <C-l> <C-W><C-l>
-" nnoremap <C-h> <C-W><C-h>
+nnoremap <C-j> <C-W><C-j>
+nnoremap <C-k> <C-W><C-k>
+nnoremap <C-l> <C-W><C-l>
+nnoremap <C-h> <C-W><C-h>
 
 " Split Resizing
 nnoremap <C-w><C-L> :vertical res -5<CR>
@@ -67,9 +68,10 @@ nnoremap <C-b>b :ls<CR>
 nnoremap <C-b>x :bd<CR>
 
 " NERDTree Keybinds
-nnoremap <C-t> :NvimTreeToggle<CR>
-nnoremap <C-f> :NvimTreeFocus<CR>
+nnoremap <leader>t :NvimTreeToggle<CR>
+nnoremap <leader>ft :NvimTreeFocus<CR>
 
+" Telescope Keybinds
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
