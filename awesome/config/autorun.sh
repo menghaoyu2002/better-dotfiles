@@ -8,5 +8,5 @@ function run {
 }
 
 run picom -b
-xinput --map-to-output 14 eDP1 
+xinput --map-to-output "ELAN Touchscreen" eDP1 
 run nm-applet --no-agent

@@ -25,16 +25,16 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
 
         if status ~= nil then
             table.insert(battery_info, {status = status, charge = tonumber(charge_str)})
-        else
-            local cap_str = string.match(s, ' = (%d+)%%')
-            table.insert(capacities, tonumber(cap_str) - 1)
+        -- else
+        --     local cap_str = string.match(s, ' = (%d+)%%')
+        --     table.insert(capacities, tonumber(cap_str))
         end
     end
 
-    local capacity = 0
-    for i, cap in ipairs(capacities) do
-        capacity = capacity + cap
-    end
+    -- local capacity = 0
+    -- for i, cap in ipairs(capacities) do
+    --     capacity = capacity + cap
+    -- end
 
     local charge = 0
     local count = 0
@@ -43,8 +43,8 @@ watch("acpi -i", 10, function(widget, stdout, stderr, exitreason, exitcode)
         count = count + 1
     end
 
-    charge = math.floor(charge / count)
-    charge = math.floor(charge / capacity * 100)
+    -- charge = math.floor(charge / count)
+    -- charge = math.floor(charge / capacity * 100)
 
     if charging then
         icon = ""
