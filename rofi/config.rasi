@@ -1,5 +1,5 @@
 configuration {
-    modi: "combi,windowcd,run";
+    modi: "drun,combi,window";
     lines: 10;
     columns: 2;
     font: "sans 15";
@@ -27,8 +27,9 @@ configuration {
     display-windowcd: "";
     display-run: "";
     display-ssh: "";
-    display-drun: "";
+    display-drun: "";
     display-combi: "";
+    display-filebrowser: "󰉋";
     kb-remove-word-back: "Control+BackSpace,Alt+d,Alt+BackSpace";
     kb-accept-entry: "Control+m,Return,KP_Enter,Alt+m";
     kb-mode-next: "Shift+Right,Control+Tab,Alt+l,Alt+Tab";
