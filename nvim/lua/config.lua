@@ -20,26 +20,39 @@ require('dashboard').setup({
         icon_hl = '@variable',
         desc = 'files',
         group = 'label',
-        action = 'telescope find_files',
+        action = 'Telescope find_files',
         key = 'f',
-      },
-      {
-        desc = ' apps',
-        group = 'diagnostichint',
-        action = 'telescope app',
-        key = 'a',
-      },
-      {
-        desc = ' dotfiles',
-        group = 'number',
-        action = 'telescope dotfiles',
-        key = 'd',
       },
     },
   }
 })
+
 require("nvim-autopairs").setup {}
-require("flash").setup()
+require("flash").setup {
+    search = {
+        mode = "regular"
+    }
+}
+vim.keymap.set('', 's', function()
+    require("flash").jump()
+end)
+vim.keymap.set('', 'S', function()
+    require("flash").treesitter()
+end)
+-- to use this, make sure to set `opts.modes.char.enabled = false`
+-- local flashChar = require("flash.plugins.char")
+-- local flashConfig = require("flash.config")
+-- for _, motion in ipairs({ "f", "t", "F", "T" }) do
+--   vim.keymap.set({ "n", "x", "o" }, motion, function()
+--     require("flash").jump(flashConfig.get({
+--       mode = "char",
+--       search = {
+--         mode = flashChar.mode(motion),
+--         max_length = 1,
+--       }
+--     }, flashChar.motions[motion]))
+--   end)
+-- end
 
 require'nvim-treesitter.configs'.setup {
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -55,18 +68,10 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-vim.keymap.set('', 's', function()
-    require("flash").jump()
-end)
-vim.keymap.set('', 'S', function()
-    require("flash").treesitter()
-end)
-
-
 vim.g.coq_settings = {
   auto_start = 'shut-up',
   keymap = {
-      jump_to_mark = "null"
+      jump_to_mark = ''
   }
 }
 

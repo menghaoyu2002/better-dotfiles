@@ -1,7 +1,3 @@
-set nocompatible              " be iMproved, required
-
-set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-
 call plug#begin()
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'nvim-tree/nvim-tree.lua'
@@ -28,7 +24,11 @@ Plug 'tpope/vim-surround'
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
+" set variables
+set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 set number
+set ignorecase
+set smartcase
 
 " Custom Keybinds
 inoremap kj <ESC>
@@ -68,21 +68,31 @@ nnoremap <C-b>b :ls<CR>
 nnoremap <C-b>x :bd<CR>
 
 " NERDTree Keybinds
-nnoremap <leader>t :NvimTreeToggle<CR>
-nnoremap <leader>ft :NvimTreeFocus<CR>
+nnoremap <leader>tt :NvimTreeToggle<CR>
+nnoremap <leader>tf :NvimTreeFocus<CR>
+nnoremap <leader>tc :NvimTreeClose<CR>
+nnoremap <leader>tr :NvimTreeRefresh<CR>
 
 " Telescope Keybinds
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>ft <cmd>Telescope treesitter<cr>
+nnoremap <leader>fs <cmd>Telescope spell_suggest<cr>
+nnoremap <leader>gs <cmd>Telescope git_status<cr>
+nnoremap <leader>gc <cmd>Telescope git_commits<cr>
+nnoremap <leader>gb <cmd>Telescope git_bcommits<cr>
 
+" Clear highlight from search
+nnoremap <leader>/ :noh<cr>
 
 " one tab is four spaces, don't @ me
 set expandtab
 set tabstop=4
 set shiftwidth=4
 
+" set theme
 set termguicolors
 colorscheme catppuccin
 
@@ -92,5 +102,6 @@ augroup highlight_yank
     au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=150})
 augroup END
 
+" import lua config
 lua require("config")
 
