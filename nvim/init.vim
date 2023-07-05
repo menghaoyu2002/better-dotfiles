@@ -12,6 +12,7 @@ Plug 'RRethy/vim-illuminate'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 Plug 'neovim/nvim-lspconfig'
+Plug 'SmiteshP/nvim-navic'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
@@ -68,10 +69,9 @@ nnoremap <C-b>b :ls<CR>
 nnoremap <C-b>x :bd<CR>
 
 " NERDTree Keybinds
-nnoremap <leader>tt :NvimTreeToggle<CR>
-nnoremap <leader>tf :NvimTreeFocus<CR>
-nnoremap <leader>tc :NvimTreeClose<CR>
-nnoremap <leader>tr :NvimTreeRefresh<CR>
+nnoremap <A-f> :NvimTreeToggle<CR>
+nnoremap <A-a> :NvimTreeFocus<CR>
+nnoremap <A-d> :NvimTreeClose<CR>
 
 " Telescope Keybinds
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
