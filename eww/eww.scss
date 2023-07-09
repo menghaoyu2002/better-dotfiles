@@ -1,0 +1,67 @@
+$icon_offset: 3px;
+$red: #f38ba8;
+$sapphire: #74c7ec;
+$blue: #89b4fa;
+$bg: #181824;
+$text: #cdd6f4;
+$hover: #313244;
+$border-radius: 10px;
+
+// Global
+*{
+  all: unset;
+}
+
+button:hover {
+    border-radius: 5px;
+    background-color: $hover;
+}
+
+.bar {
+    font-weight: bold;
+    border-radius: $border-radius;
+    padding: 0.5rem;
+    background-color: $bg;
+    color: $text; 
+    min-width: 2em;
+    font-family: "Fira Code Nerd Font Mono";
+}
+
+.icon {
+    font-size: 2rem;
+    padding-left: $icon_offset;
+}
+
+.workspaces {
+    margin-top: 1rem;
+
+    .empty {
+        color: #585b70;
+    }
+
+    .active {
+        color: $blue;
+    }
+
+    .icon {
+        font-size: 1.43rem;
+    }
+}
+
+
+.clock {
+    font-family: "Google Sans";
+    font-size: 1.3rem;
+    padding: 0.2rem;
+} 
+
+.power {
+    background: none;
+    color: $red;
+}
+
+.top {
+    >.icon {
+        color: $sapphire;
+    }
+}
