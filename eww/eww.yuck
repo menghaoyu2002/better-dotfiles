@@ -1,5 +1,13 @@
 (deflisten hyprland :initial '{"workspaces": []}' "./scripts/hyprland.sh")
 
+(defwidget panel_separator [orientation dots visible] (box
+    :orientation orientation
+    :class "separator"
+    :space-evenly false
+    :visible visible
+    (for dot in dots
+        (box :class "dot" :halign "center" :hexpand true :valign "center"))))
+
 (defwidget workspaces []
     (box
         :class "workspaces"
@@ -9,6 +17,7 @@
                 :class "workspace-btn ${workspace.focused ? "active" : ""} ${workspace.occupied ? "occupied" : "empty"}"
                 :onclick "hyprctl dispatch workspace ${workspace.number}"
                 :valign "center"
+                :halign "center"
                 (label :class "icon" :text {workspace.focused ? "" :  "${workspace.occupied ? "" : "" }"}))
         )
     )
@@ -25,6 +34,7 @@
     (box
         :class "top"
         :valign "start"
+        :halign "center"
         :space-evenly false
         :orientation "v"
         (label :class "icon" :text "󰣇")
@@ -36,6 +46,7 @@
     (box
         :class "center"
         :valign "center"
+        :halign "center"
         (clock)
     )
 )
@@ -43,6 +54,7 @@
 (defwidget bot []
     (box
         :class "bot"
+        :halign "center"
         :valign "end"
         (power)
     )
@@ -56,6 +68,7 @@
         :orientation "v"
         :space-evenly false
         (label :text {formattime(EWW_TIME, "%H")})
+        (panel_separator :orientation "h" :dots "[1, 2]" :visible true)
         (label :text {formattime(EWW_TIME, "%M")})
     )
 )
@@ -75,7 +88,7 @@
     :exclusive true
     :geometry (geometry
         :x "5px"
-        :y "0%"
+        :y "10px"
         :width "0%"
         :height "98.5%"
         :anchor "left center")

@@ -4,31 +4,27 @@ $sapphire: #74c7ec;
 $blue: #89b4fa;
 $bg: #181824;
 $text: #cdd6f4;
-$hover: #313244;
+$hover: #45475a;
 $border-radius: 10px;
+$large-icon: 2.2rem;
 
 // Global
 *{
   all: unset;
 }
 
-button:hover {
-    border-radius: 5px;
-    background-color: $hover;
-}
-
 .bar {
     font-weight: bold;
     border-radius: $border-radius;
-    padding: 0.5rem;
+    padding: 0.4rem;
     background-color: $bg;
     color: $text; 
-    min-width: 2em;
+    min-width: 2.2em;
     font-family: "Fira Code Nerd Font Mono";
 }
 
 .icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
     padding-left: $icon_offset;
 }
 
@@ -43,8 +39,8 @@ button:hover {
         color: $blue;
     }
 
-    .icon {
-        font-size: 1.43rem;
+    .workspace-btn:hover {
+        color: $hover;
     }
 }
 
@@ -55,13 +51,31 @@ button:hover {
     padding: 0.2rem;
 } 
 
-.power {
-    background: none;
-    color: $red;
+
+.bot {
+    .power {
+        font-size: $large-icon;
+        color: $red;
+
+        &:hover {
+            color: #ad4e69;
+        }
+    }
 }
 
 .top {
     >.icon {
+        font-size: $large-icon;
         color: $sapphire;
+    }
+}
+
+.separator{
+    margin: 0.05em;
+    .dot{
+        min-height: .2em;
+        min-width: .2em;
+        border-radius: 10px;
+        background-color: transparentize($text, 0.6);
     }
 }
