@@ -14,11 +14,6 @@ workspace_event() {
   while read -r k v; do workspaces[$k]="$v"; done < <(hyprctl -j workspaces | jaq -jr '.[] | .id, " ", .monitor, "\n"')
 }
 
-# handle monitor (dis)connects
-# monitor_event() {
-#   while read -r k v; do monitormap["$k"]=$v; done < <(hyprctl -j monitors | jaq -jr '.[] | .name, " ", .id, "\n"')
-# }
-
 # generate the json for eww
 generate() {
   echo -n '{"workspaces": ['
@@ -31,9 +26,6 @@ generate() {
 }
 
 # setup
-
-# add monitors
-# monitor_event
 
 # add workspaces
 workspace_event
@@ -61,9 +53,6 @@ socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - |
   "destroyworkspace")
     o[${line#*>>}]=0
     ;;
-  # "monitor"*)
-  #   monitor_event
-  #   ;;
   esac
   generate
 done

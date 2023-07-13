@@ -1,12 +1,21 @@
-$icon_offset: 3px;
 $red: #f38ba8;
 $sapphire: #74c7ec;
 $blue: #89b4fa;
 $bg: #181824;
+$base: #24273a;
 $text: #cdd6f4;
 $hover: #45475a;
+$green: #a6e3a1;
+$purple: #cba6f7;
+$orange: #fab387;
+$rosewater: #f5e0dc;
+$lavendar: #b4befe;
+$surface0: #313244;
+$surface1: #45475a;
+$surface2: #585b70;
 $border-radius: 10px;
-$large-icon: 2.2rem;
+$large-icon: 2rem;
+$icon_offset: 3px;
 
 // Global
 *{
@@ -16,15 +25,14 @@ $large-icon: 2.2rem;
 .bar {
     font-weight: bold;
     border-radius: $border-radius;
-    padding: 0.4rem;
+    padding: 0.3rem;
     background-color: $bg;
     color: $text; 
-    min-width: 2.2em;
+    min-width: 2.2rem;
     font-family: "Fira Code Nerd Font Mono";
 }
 
 .icon {
-    font-size: 1.5rem;
     padding-left: $icon_offset;
 }
 
@@ -42,6 +50,10 @@ $large-icon: 2.2rem;
     .workspace-btn:hover {
         color: $hover;
     }
+
+    .icon {
+        font-size: 1.4rem;
+    }
 }
 
 
@@ -53,12 +65,59 @@ $large-icon: 2.2rem;
 
 
 .bot {
-    .power {
+    .shutdown {
         font-size: $large-icon;
         color: $red;
 
         &:hover {
             color: #ad4e69;
+        }
+    }
+
+    .battery {
+        font-size: 1.2rem;
+        .high {
+            color: $sapphire;
+        }
+
+        .med {
+            color: $orange
+        }
+
+        .low {
+            color: $red
+        }
+
+        .charging {
+            color: $green;
+        }
+    }
+
+    .poweroptions {
+        background: $surface0;
+        margin-top: 1rem;
+        min-width: 2em;
+        padding: 0.5rem 0rem;
+        border-radius: $border-radius;
+
+        .icon {
+            font-size: 1.4rem;
+        }
+
+        .reboot {
+            color: $orange;
+        }
+
+        .sleep {
+            color: $lavendar;
+        }
+
+        .lock {
+            color: $sapphire;
+        }
+
+        .logout {
+            color: $purple;
         }
     }
 }
@@ -79,3 +138,15 @@ $large-icon: 2.2rem;
         background-color: transparentize($text, 0.6);
     }
 }
+
+tooltip {
+    > * > * {
+        font-family: "Google Sans";
+        background-color: $base;
+        border-radius: $border-radius;
+        color: $text;
+        padding: 6px;
+        margin: 3px;
+    }
+}
+

@@ -1,0 +1,57 @@
+(include "./yuck/workspaces.yuck")
+(include "./yuck/powermenu.yuck")
+(include "./yuck/battery.yuck")
+(include "./yuck/dots.yuck")
+
+
+(defwidget top []
+    (box
+        :class "top"
+        :valign "start"
+        :halign "center"
+        :space-evenly false
+        :orientation "v"
+        (label :class "icon" :text "󰣇")
+        (workspaces)
+    )
+)
+
+(defwidget center []
+    (box
+        :class "center"
+        :valign "center"
+        :halign "center"
+        (clock)
+    )
+)
+
+(defwidget bot []
+    (box
+        :class "bot"
+        :halign "center"
+        :valign "end"
+        :orientation "v"
+        :space-evenly false
+        (battery)
+        (powermenu)))
+
+;; Clock Widget
+(defwidget clock []
+    (box
+        :class "clock"
+        :orientation "v"
+        :space-evenly false
+        (label :text {formattime(EWW_TIME, "%H")})
+        (dots :orientation "h" :dots "[1, 2]" :visible true)
+        (label :text {formattime(EWW_TIME, "%M")})
+    )
+)
+
+;; Bar Widget
+(defwidget bar [] (centerbox :orientation "v"
+    :class "bar"
+    (top)
+    (center)
+    (bot)
+))
+
