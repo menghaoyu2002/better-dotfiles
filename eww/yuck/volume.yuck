@@ -1,0 +1,13 @@
+(defpoll volume :interval "1s" :initial 0.50 "wpctl get-volume @DEFAULT_SINK@ | awk '{print $2}'")
+(defpoll volstatus :interval "1s" :initial "" "wpctl get-volume @DEFAULT_SINK@ | awk '{print $3}' | tr -d '[]'")
+
+(defwidget volume [] 
+    (box :class "volume-container"
+        :tooltip "Volume: ${volume * 100}%"
+    (label 
+        :class "icon volume" 
+        :text {volstatus == "MUTED" ? "󰝟" : 
+        volume >= 0.80 ? "" :
+        volume >= 0.50 ? "" :
+        volume > 0 ? "" : "󰝟"}))
+)

@@ -1,7 +1,10 @@
 (include "./yuck/workspaces.yuck")
 (include "./yuck/powermenu.yuck")
 (include "./yuck/battery.yuck")
+(include "./yuck/volume.yuck")
 (include "./yuck/dots.yuck")
+(include "./yuck/clock.yuck")
+(include "./yuck/internet.yuck")
 
 
 (defwidget top []
@@ -33,19 +36,10 @@
         :orientation "v"
         :space-evenly false
         (battery)
+        (volume)
+        (internet)
         (powermenu)))
 
-;; Clock Widget
-(defwidget clock []
-    (box
-        :class "clock"
-        :orientation "v"
-        :space-evenly false
-        (label :text {formattime(EWW_TIME, "%H")})
-        (dots :orientation "h" :dots "[1, 2]" :visible true)
-        (label :text {formattime(EWW_TIME, "%M")})
-    )
-)
 
 ;; Bar Widget
 (defwidget bar [] (centerbox :orientation "v"

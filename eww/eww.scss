@@ -1,4 +1,5 @@
 $red: #f38ba8;
+$teal: #94e2d5;
 $sapphire: #74c7ec;
 $blue: #89b4fa;
 $bg: #181824;
@@ -14,8 +15,8 @@ $surface0: #313244;
 $surface1: #45475a;
 $surface2: #585b70;
 $border-radius: 10px;
-$large-icon: 2rem;
-$icon_offset: 3px;
+$large-icon: 1.6rem;
+$icon_offset: 4px;
 
 // Global
 *{
@@ -29,11 +30,11 @@ $icon_offset: 3px;
     background-color: $bg;
     color: $text; 
     min-width: 2.2rem;
-    font-family: "Fira Code Nerd Font Mono";
+    font-family: "Fira Code";
 }
 
 .icon {
-    padding-left: $icon_offset;
+    padding-right: $icon_offset;
 }
 
 .workspaces {
@@ -52,7 +53,8 @@ $icon_offset: 3px;
     }
 
     .icon {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+        padding-left: 1px;
     }
 }
 
@@ -75,7 +77,8 @@ $icon_offset: 3px;
     }
 
     .battery {
-        font-size: 1.2rem;
+        font-size: 1.6rem;
+        padding-left: 6px;
         .high {
             color: $sapphire;
         }
@@ -95,13 +98,14 @@ $icon_offset: 3px;
 
     .poweroptions {
         background: $surface0;
-        margin-top: 1rem;
         min-width: 2em;
+        margin-top: 0.5rem;
         padding: 0.5rem 0rem;
         border-radius: $border-radius;
 
         .icon {
             font-size: 1.4rem;
+            padding-left: 2.8px;
         }
 
         .reboot {
@@ -132,6 +136,17 @@ $icon_offset: 3px;
             }
         }
     }
+
+    .volume {
+        font-size: 1.4rem;
+        color: $lavendar;
+    }
+
+    .internet {
+        font-size: 1.3rem;
+        padding-right: 5px;
+        color: $teal;
+    }
 }
 
 .top {
@@ -139,6 +154,8 @@ $icon_offset: 3px;
         font-size: $large-icon;
         color: $sapphire;
     }
+
+    
 }
 
 .separator{

@@ -1,0 +1,13 @@
+(defpoll connection :interval "1s" :initial "" "cat /sys/class/net/w*/operstate")
+(defpoll connectionstrength :interval "1s" :initial 50 "nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\*/{if (NR!=1) {print $2}}'")
+(defpoll connectionname :interval "1s" :initial "" "nmcli | grep '^wlp' | sed 's/\ connected\ to\ /Connected to /g' | cut -d ':' -f2")
+
+(defwidget internet []
+    (label :class "icon internet"
+        :tooltip connectionname
+        :text {connection == "down" ? "󰤭":
+              connectionstrength >= 80 ? "󰤨" :
+              connectionstrength >= 75 ? "󰤥" :
+              connectionstrength >= 50 ? "󰤢" :
+              connectionstrength >= 20 ? "󰤟" : "󰤯"})
+)

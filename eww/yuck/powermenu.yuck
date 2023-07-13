@@ -4,8 +4,8 @@
     (button 
         :class "powerbutton ${label}"
         :onclick "eww update showpoweroptions=false && ${action}"
-        :tooltip label
-        (label :class "icon" :text icon ""))
+        ;; :tooltip label
+        (label :class "icon" :text icon))
 )
 
 (defwidget poweroptions []
