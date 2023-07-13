@@ -106,18 +106,30 @@ $icon_offset: 3px;
 
         .reboot {
             color: $orange;
+            &:hover {
+                color: #ad725c;
+            }
         }
 
         .sleep {
             color: $lavendar;
+            &:hover {
+                color: #767eb0;
+            }
         }
 
         .lock {
             color: $sapphire;
+            &:hover {
+                color: #5592ad;
+            }
         }
 
         .logout {
             color: $purple;
+            &:hover {
+                color: #8a6fab;
+            }
         }
     }
 }
