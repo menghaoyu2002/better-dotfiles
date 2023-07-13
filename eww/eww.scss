@@ -1,3 +1,8 @@
+// Global
+*{
+  all: unset;
+}
+
 $red: #f38ba8;
 $teal: #94e2d5;
 $sapphire: #74c7ec;
@@ -17,11 +22,6 @@ $surface2: #585b70;
 $border-radius: 10px;
 $large-icon: 1.6rem;
 $icon_offset: 4px;
-
-// Global
-*{
-  all: unset;
-}
 
 .bar {
     font-weight: bold;
@@ -77,8 +77,11 @@ $icon_offset: 4px;
     }
 
     .battery {
-        font-size: 1.6rem;
-        padding-left: 6px;
+        .icon {
+            font-size: 1.6rem;
+            padding-left: 7px;
+        }
+
         .high {
             color: $sapphire;
         }
@@ -109,7 +112,7 @@ $icon_offset: 4px;
         }
 
         .reboot {
-            color: $orange;
+            color: $rosewater;
             &:hover {
                 color: #ad725c;
             }
@@ -179,3 +182,17 @@ tooltip {
     }
 }
 
+scale trough {
+  all: unset;
+  background-color: $surface0;
+  border-radius: 5px;
+  min-height: 80px;
+  min-width: 10px;
+  margin: .3rem 0 .3rem 0;
+  margin-left: 2px;
+}
+
+.volbar trough highlight {
+  background-color: $lavendar;
+  border-radius: 5px;
+}

@@ -1,13 +1,41 @@
 (defpoll volume :interval "1s" :initial 0.50 "wpctl get-volume @DEFAULT_SINK@ | awk '{print $2}'")
 (defpoll volstatus :interval "1s" :initial "" "wpctl get-volume @DEFAULT_SINK@ | awk '{print $3}' | tr -d '[]'")
+(defvar showvolslider false)
 
-(defwidget volume [] 
-    (box :class "volume-container"
-        :tooltip "Volume: ${volume * 100}%"
+(defwidget volumeslider []
+    (revealer 
+        :reveal showvolslider
+        :transition "slideup"
+    (scale
+        :class "volbar"
+        :orientation "v" 
+        :min 0
+        :max 101
+        :value {volstatus == "MUTED" ? 0 : volume * 100}
+        :onchange "wpctl set-volume @DEFAULT_SINK@ {}%"
+        :flipped true)
+    )
+)
+
+(defwidget volumebutton []
+    (button :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     (label 
         :class "icon volume" 
         :text {volstatus == "MUTED" ? "󰝟" : 
         volume >= 0.80 ? "" :
         volume >= 0.50 ? "" :
-        volume > 0 ? "" : "󰝟"}))
+        volume > 0 ? "" : "󰝟"})
+    )
+)
+
+(defwidget volume [] 
+    (eventbox
+        :class "volume-container"
+        :tooltip "Volume: ${volstatus == "MUTED" ? "muted" : volume * 100 + "%"}"
+        :onhover "eww update showvolslider=true"
+        :onhoverlost "eww update showvolslider=false"
+        (box :orientation "v" :space-evenly false
+        (volumeslider)
+        (volumebutton))
+    )
 )
