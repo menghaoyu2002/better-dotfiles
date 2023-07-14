@@ -15,6 +15,7 @@ $green: #a6e3a1;
 $purple: #cba6f7;
 $orange: #fab387;
 $rosewater: #f5e0dc;
+$yellow: #f9e2af;
 $lavendar: #b4befe;
 $surface0: #313244;
 $surface1: #45475a;
@@ -145,6 +146,11 @@ $icon_offset: 4px;
         color: $lavendar;
     }
 
+    .brightness {
+        font-size: 1.35rem;
+        color: $yellow;
+    }
+
     .internet {
         font-size: 1.3rem;
         padding-right: 5px;
@@ -194,5 +200,9 @@ scale trough {
 
 .volbar trough highlight {
   background-color: $lavendar;
+  border-radius: 5px;
+}
+.brightness-slider trough highlight {
+  background-color: $yellow;
   border-radius: 5px;
 }

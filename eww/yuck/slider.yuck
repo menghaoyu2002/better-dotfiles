@@ -1,0 +1,15 @@
+(defwidget slider [reveal class value onchange]
+    (revealer 
+        :reveal reveal
+        :transition "slideup"
+        :duration 400
+    (scale
+        :class class
+        :orientation "v" 
+        :min 0
+        :max 101
+        :value value
+        :onchange onchange
+        :flipped true)
+    )
+)

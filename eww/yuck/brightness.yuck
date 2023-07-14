@@ -1,0 +1,23 @@
+(defpoll brightness :interval "1s" :initial 50 "brightnessctl i | grep 'Current brightness' | awk '{print $4}' | tr -d '(%)'")
+(defvar showbrightnessslider false)
+
+(defwidget brightness []
+    (eventbox
+        :onhover "eww update showbrightnessslider=true"
+        :onhoverlost "eww update showbrightnessslider=false"
+    (box
+        :orientation "v"
+        :tooltip "Brightness: ${brightness}%"
+        :space-evenly false
+        (slider
+            :reveal showbrightnessslider
+            :class "brightness-slider"
+            :value brightness
+            :onchange "brightnessctl -q set {}%"
+        )
+        (label :class "icon brightness" :text {
+            brightness >= 70 ? "󰃠" : 
+            brightness >= 30 ? "󰃟" : "󰃞"
+        })
+    ))
+)

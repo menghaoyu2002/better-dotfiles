@@ -5,6 +5,8 @@
 (include "./yuck/dots.yuck")
 (include "./yuck/clock.yuck")
 (include "./yuck/internet.yuck")
+(include "./yuck/brightness.yuck")
+(include "./yuck/slider.yuck")
 
 
 (defwidget top []
@@ -36,6 +38,7 @@
         :orientation "v"
         :space-evenly false
         (battery)
+        (brightness)
         (volume)
         (internet)
         (powermenu)))
