@@ -1,30 +1,7 @@
-(deflisten hyprland :initial '{"workspaces": []}' "./scripts/hyprland.sh")
+(defvar mainmonitor "1")
 
-(include "./yuck/bar.yuck")
+(include "./widgets/bar.yuck")
 
-;; Main window
-(defwindow bar1
-    :monitor 1
-    :stacking "fg"
-    :exclusive true
-    :geometry (geometry
-        :x "5px"
-        :y "10px"
-        :width "1%"
-        :height "98%"
-        :anchor "left center")
-(bar))
-
-
-(defwindow bar0
-    :monitor 0
-    :stacking "fg"
-    :exclusive true
-    :geometry (geometry
-        :x "5px"
-        :y "10px"
-        :width "1%"
-        :height "98%"
-        :anchor "left center")
-(bar))
-
+(include "./windows/leftbar.yuck")
+(include "./windows/powerconfirm.yuck")
+(include "./windows/calendar.yuck")

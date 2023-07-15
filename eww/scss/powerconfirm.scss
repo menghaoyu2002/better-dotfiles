@@ -1,0 +1,60 @@
+.confirmmenu {
+    background-color: $bg-2;
+    border-radius: 5px;
+    border: solid $surface2 2px;
+    color: $text;
+    font-family: Google Sans; 
+    padding: 0.5rem;
+
+    .confirmtext {
+        font-size: 1.2rem;
+    }
+
+    .confirmbutton {
+        background-color: $surface0;
+        border-radius: 5px;
+        margin: 0.2rem 1rem;
+        font-size: 1.3rem;
+
+        &:hover {
+            background-color: $hover;
+        }
+    }
+
+    .reboot {
+        color: $rosewater;
+        &:hover {
+            color: #ad725c;
+        }
+    }
+
+    .sleep {
+        color: $lavendar;
+        &:hover {
+            color: #767eb0;
+        }
+    }
+
+    .lock {
+        color: $sapphire;
+        &:hover {
+            color: #5592ad;
+        }
+    }
+
+    .logout {
+        color: $purple;
+        &:hover {
+            color: #8a6fab;
+        }
+    }
+
+    .shutdown {
+        color: $red;
+    }
+
+    .closeconfirm {
+        color: $blue;
+        font-size: 1.5rem;
+    }
+}

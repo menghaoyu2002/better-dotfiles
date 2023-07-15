@@ -1,0 +1,28 @@
+.datemenu {
+    background-color: $bg-2;
+    font-size: 1.2rem;
+    font-family: Google Sans;
+    border-radius: 5px;
+    border: solid 2px $surface1;
+    padding: 1rem;
+
+    .calendar {
+        background-color: $base;
+        padding: 0.2rem;
+        border-radius: 10px;
+    }
+
+    .datestring {
+        font-weight: bold;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    calendar {
+            &:selected{
+            box-shadow: inset 0 -6px 0 0 transparentize($blue, 0.5),
+            inset 0 0 0 1px $blue;
+            border-radius: 10px;
+        }
+    }
+}

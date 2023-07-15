@@ -1,0 +1,21 @@
+(defwindow powerconfirm1
+    :monitor 1
+    :stacking "fg"
+    :exclusive false
+    :geometry (geometry
+        :y "5px"
+        :width "20%"
+        :height "1%"
+        :anchor "center")
+(confirmmenu))
+
+(defwindow powerconfirm0
+    :monitor 0
+    :stacking "fg"
+    :exclusive false
+    :geometry (geometry
+        :y "5px"
+        :width "20%"
+        :height "1%"
+        :anchor "center")
+(confirmmenu))

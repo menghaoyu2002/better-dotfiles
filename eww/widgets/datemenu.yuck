@@ -1,0 +1,7 @@
+(defvar showdatemenu false)
+
+(defwidget datemenu[]
+    (box :class "datemenu" :orientation "v" :space-evenly false
+    (label :class "datestring" :text {formattime(EWW_TIME, "%A,  %B %e,  %Y")})
+    (calendar :class "calendar"))
+)

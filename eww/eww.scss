@@ -3,11 +3,13 @@
   all: unset;
 }
 
+// colors
 $red: #f38ba8;
 $teal: #94e2d5;
 $sapphire: #74c7ec;
 $blue: #89b4fa;
 $bg: #181824;
+$bg-2: #20202e;
 $base: #24273a;
 $text: #cdd6f4;
 $hover: #45475a;
@@ -20,189 +22,12 @@ $lavendar: #b4befe;
 $surface0: #313244;
 $surface1: #45475a;
 $surface2: #585b70;
+
+// constants
 $border-radius: 10px;
 $large-icon: 1.6rem;
 $icon_offset: 4px;
 
-.bar {
-    font-weight: bold;
-    border-radius: $border-radius;
-    padding: 0.3rem;
-    background-color: $bg;
-    color: $text; 
-    min-width: 2.2rem;
-    font-family: "Fira Code";
-}
-
-.icon {
-    padding-right: $icon_offset;
-}
-
-.workspaces {
-    margin-top: 1rem;
-
-    .empty {
-        color: #585b70;
-    }
-
-    .active {
-        color: $blue;
-    }
-
-    .workspace-btn:hover {
-        color: $hover;
-    }
-
-    .icon {
-        font-size: 1.3rem;
-        padding-left: 1px;
-    }
-}
-
-
-.clock {
-    font-family: "Google Sans";
-    font-size: 1.3rem;
-    padding: 0.2rem;
-} 
-
-
-.bot {
-    .shutdown {
-        font-size: $large-icon;
-        color: $red;
-
-        &:hover {
-            color: #ad4e69;
-        }
-    }
-
-    .battery {
-        .icon {
-            font-size: 1.6rem;
-            padding-left: 7px;
-        }
-
-        .high {
-            color: $sapphire;
-        }
-
-        .med {
-            color: $orange
-        }
-
-        .low {
-            color: $red
-        }
-
-        .charging {
-            color: $green;
-        }
-    }
-
-    .poweroptions {
-        background: $surface0;
-        min-width: 2em;
-        margin-top: 0.5rem;
-        padding: 0.5rem 0rem;
-        border-radius: $border-radius;
-
-        .icon {
-            font-size: 1.4rem;
-            padding-left: 2.8px;
-        }
-
-        .reboot {
-            color: $rosewater;
-            &:hover {
-                color: #ad725c;
-            }
-        }
-
-        .sleep {
-            color: $lavendar;
-            &:hover {
-                color: #767eb0;
-            }
-        }
-
-        .lock {
-            color: $sapphire;
-            &:hover {
-                color: #5592ad;
-            }
-        }
-
-        .logout {
-            color: $purple;
-            &:hover {
-                color: #8a6fab;
-            }
-        }
-    }
-
-    .volume {
-        font-size: 1.4rem;
-        color: $lavendar;
-    }
-
-    .brightness {
-        font-size: 1.35rem;
-        color: $yellow;
-    }
-
-    .internet {
-        font-size: 1.3rem;
-        padding-right: 5px;
-        color: $teal;
-    }
-}
-
-.top {
-    >.icon {
-        font-size: $large-icon;
-        color: $sapphire;
-    }
-
-    
-}
-
-.separator{
-    margin: 0.05em;
-    .dot{
-        min-height: .2em;
-        min-width: .2em;
-        border-radius: 10px;
-        background-color: transparentize($text, 0.6);
-    }
-}
-
-tooltip {
-    > * > * {
-        font-family: "Google Sans";
-        background-color: $base;
-        border-radius: $border-radius;
-        color: $text;
-        padding: 6px;
-        margin: 3px;
-    }
-}
-
-scale trough {
-  all: unset;
-  background-color: $surface0;
-  border-radius: 5px;
-  min-height: 80px;
-  min-width: 10px;
-  margin: .3rem 0 .3rem 0;
-  margin-left: 2px;
-}
-
-.volbar trough highlight {
-  background-color: $lavendar;
-  border-radius: 5px;
-}
-.brightness-slider trough highlight {
-  background-color: $yellow;
-  border-radius: 5px;
-}
+@import 'scss/bar';
+@import 'scss/powerconfirm';
+@import 'scss/datemenu'

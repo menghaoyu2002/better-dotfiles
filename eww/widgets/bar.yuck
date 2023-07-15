@@ -1,12 +1,12 @@
-(include "./yuck/workspaces.yuck")
-(include "./yuck/powermenu.yuck")
-(include "./yuck/battery.yuck")
-(include "./yuck/volume.yuck")
-(include "./yuck/dots.yuck")
-(include "./yuck/clock.yuck")
-(include "./yuck/internet.yuck")
-(include "./yuck/brightness.yuck")
-(include "./yuck/slider.yuck")
+(include "./widgets/workspaces.yuck")
+(include "./widgets/powermenu.yuck")
+(include "./widgets/battery.yuck")
+(include "./widgets/volume.yuck")
+(include "./widgets/dots.yuck")
+(include "./widgets/clock.yuck")
+(include "./widgets/internet.yuck")
+(include "./widgets/brightness.yuck")
+(include "./widgets/slider.yuck")
 
 
 (defwidget top []
