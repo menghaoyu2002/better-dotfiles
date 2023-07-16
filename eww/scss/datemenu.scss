@@ -1,9 +1,9 @@
 .datemenu {
-    background-color: $bg-2;
+    background-color: $bg;
     font-size: 1.2rem;
     font-family: Google Sans;
     border-radius: 5px;
-    border: solid 2px $surface1;
+    border: solid 1.3px transparentize($lavendar, 0.5);
     padding: 1rem;
 
     .calendar {
