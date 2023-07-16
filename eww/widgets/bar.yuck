@@ -7,6 +7,7 @@
 (include "./widgets/internet.yuck")
 (include "./widgets/brightness.yuck")
 (include "./widgets/slider.yuck")
+(include "./widgets/spotify.yuck")
 
 
 (defwidget top []
@@ -37,6 +38,7 @@
         :valign "end"
         :orientation "v"
         :space-evenly false
+        (spotify)
         (battery)
         (brightness)
         (volume)

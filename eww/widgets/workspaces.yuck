@@ -1,3 +1,5 @@
+(deflisten hyprland :initial '{"workspaces": []}' "./scripts/hyprland.sh")
+
 (defwidget workspaces []
     (box
         :class "workspaces"

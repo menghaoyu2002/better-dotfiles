@@ -1,0 +1,15 @@
+(defpoll spotify :interval "1s" :initial '{"status": ""}' "./scripts/spotify.sh")
+
+(defwidget spotify []
+(revealer :reveal {spotify.status != ""}
+    (eventbox
+        (box :class "spotify" :orientation "v"
+        (button :onclick "playerctl -p spotify previous"
+            (label :class "icon prev" :text "󰙣"))
+        (button :onclick "playerctl -p spotify play-pause"
+            (label :class "icon playpause" :text {spotify.status == "Playing" ? "" : ""}))
+        (button :onclick "playerctl -p spotify next"
+            (label :class "icon next" :text "󰙡"))
+        (label :class "icon spotifyicon" :text '󰓇')))
+    )
+)

@@ -1,5 +1,3 @@
-(deflisten hyprland :initial '{"workspaces": []}' "./scripts/hyprland.sh")
-
 ;; Main window
 (defwindow bar1
     :monitor 1
