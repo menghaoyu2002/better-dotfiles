@@ -54,7 +54,7 @@
     .battery {
         .icon {
             font-size: 1.6rem;
-            padding-left: 7px;
+            padding-left: 8px;
         }
 
         .high {
@@ -89,28 +89,28 @@
         .reboot {
             color: $rosewater;
             &:hover {
-                color: #ad725c;
+                color: $orange-hover;
             }
         }
 
         .sleep {
             color: $lavendar;
             &:hover {
-                color: #767eb0;
+                color: $lavendar-hover;
             }
         }
 
         .lock {
             color: $sapphire;
             &:hover {
-                color: #5592ad;
+                color: $sapphire-hover;
             }
         }
 
         .logout {
             color: $purple;
             &:hover {
-                color: #8a6fab;
+                color: $purple-hover;
             }
         }
     }
@@ -176,7 +176,9 @@ scale trough {
   background-color: $lavendar;
   border-radius: 5px;
 }
+
 .brightness-slider trough highlight {
   background-color: $yellow;
   border-radius: 5px;
 }
+

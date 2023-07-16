@@ -15,6 +15,7 @@
 
 (defwidget volume [] 
     (eventbox
+        :cursor "pointer"
         :class "volume-container"
         :tooltip "Volume: ${volstatus == "MUTED" ? "muted" : volume * 100 + "%"}"
         :onhover "eww update showvolslider=true"

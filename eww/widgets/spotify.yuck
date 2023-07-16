@@ -1,15 +1,26 @@
-(defpoll spotify :interval "1s" :initial '{"status": ""}' "./scripts/spotify.sh")
+(defpoll spotify 
+    :interval "1s"
+    :initial '{
+        "status": "",
+        "coverart": "./coverart.png",
+        "length_seconds": "0",
+        "position_seconds": "0",
+        "volume": "0"
+        }'
+    "./scripts/spotify.sh")
 
 (defwidget spotify []
-(revealer :reveal {spotify.status != ""}
-    (eventbox
-        (box :class "spotify" :orientation "v"
-        (button :onclick "playerctl -p spotify previous"
-            (label :class "icon prev" :text "󰙣"))
-        (button :onclick "playerctl -p spotify play-pause"
-            (label :class "icon playpause" :text {spotify.status == "Playing" ? "" : ""}))
-        (button :onclick "playerctl -p spotify next"
-            (label :class "icon next" :text "󰙡"))
-        (label :class "icon spotifyicon" :text '󰓇')))
-    )
+(revealer :reveal {spotify.status != ""} :duration 300
+    (eventbox 
+        :cursor "pointer"
+        :onclick "eww open --toggle spotifymenu${mainmonitor}"
+        (box :class "spotify" :orientation "v" 
+        (button :onclick "playerctl -p spotify previous" :class "spotifybtn prev"
+            (label :class "icon" :text "󰙣"))
+        (button :onclick "playerctl -p spotify play-pause" :class "spotifybtn playpause"
+            (label :class "icon" :text {spotify.status == "Playing" ? "" : ""}))
+        (button :onclick "playerctl -p spotify next" :class "spotifybtn next"
+            (label :class "icon" :text "󰙡"))
+        (label :class "icon spotifyicon" :text '󰓇'))
+    ))
 )

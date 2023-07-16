@@ -1,0 +1,89 @@
+(defwidget spotifymenu []
+(box :orientation "h" :class "spotifymenu" :space-evenly false
+    (spotifyvolumepanel)
+    (image 
+        :class "coverart"
+        :path {spotify.coverart}
+        :image-width 225
+        :image-height 225)
+    (spotifycontrolpanel)
+))
+
+(defwidget spotifyvolumepanel []
+    (box :orientation "v" :space-evenly false :valign "center" :halign "center"
+    (slider
+       :reveal true
+       :class "spotifyvol"
+       :value {spotify.volume * 100} 
+       :onchange "playerctl -p spotify volume 0.{}")
+        (label 
+            :halign "start"
+            :valign "center"
+            :class "icon spotifyvolicon" 
+            :text { spotify.volume >= 0.50 ? "󰕾" :
+            spotify.volume >= 0.30 ? "󰖀" :
+            spotify.volume > 0 ? "󰕿" : "󰝟"})
+    )
+)
+
+(defwidget spotifycontrolpanel []
+    (box 
+        :valign "center"
+        :halign "center"
+        :orientation "v"
+        :space-evenly false 
+        :class "controlpanel"
+        (label :class "title" :text {spotify.title})
+        (label :class "artist" :text {spotify.artist})
+        (spotifymediacontrols)
+        (spotifydurationslider)
+    )
+)
+
+(defwidget spotifymediacontrols []
+    (box 
+        :space-evenly false
+        :halign "center"
+        :class "mediacontrols"
+        (button
+            :halign "end"
+            :onclick "playerctl -p spotify shuffle toggle"
+            :class "spotifybtn shuffle"
+            (label 
+            :style "color: ${spotify.shuffle == "On" ? "#a6e3a1" : "#cdd6f4" };"
+            :class "icon"
+            :text "󰒟"))
+        (button 
+            :halign "end"
+            :onclick "playerctl -p spotify previous"
+            :class "spotifybtn prev"
+            (label :class "icon" :text "󰒮"))
+        (button :onclick "playerctl -p spotify play-pause" :class "spotifybtn playpause"
+            (label :class "icon" :text {spotify.status == "Playing" ? "󰏥" : ""}))
+        (button 
+            :halign "start"
+            :onclick "playerctl -p spotify next" 
+            :class "spotifybtn next"
+            (label :class "icon" :text "󰒭"))
+        (button 
+            :halign "start"
+            :onclick "playerctl -p spotify loop ${spotify.loop == "None" ? "Track" : "None" }" 
+            :class "spotifybtn loop"
+            (label
+            :style "color: ${spotify.loop == "None" ? "#cdd6f4" : "#a6e3a1"};"
+            :class "icon"
+            :text "󰕇")))
+)
+
+(defwidget spotifydurationslider [] 
+    (box :space-evenly false :halign "center"
+        (label :class "position" :text {spotify.position_str})
+        (eventbox :cursor "pointer"
+            (scale 
+                :class "spotifyslider"
+                :value {spotify.position_seconds}
+                :min 0
+                :onchange 'playerctl -p spotify position {}'
+                :max {spotify.length_seconds}))
+        (label :class "length" :text {spotify.length_str}))
+)

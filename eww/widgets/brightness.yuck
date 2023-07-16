@@ -3,6 +3,7 @@
 
 (defwidget brightness []
     (eventbox
+        :cursor "pointer"
         :onhover "eww update showbrightnessslider=true"
         :onhoverlost "eww update showbrightnessslider=false"
     (box

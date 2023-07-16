@@ -32,6 +32,7 @@
 
 (defwidget powermenu []
     (eventbox
+        :cursor "pointer"
         :onhover "eww update showpoweroptions=true"
         :onhoverlost "eww update showpoweroptions=false"
         :class "powermenu"

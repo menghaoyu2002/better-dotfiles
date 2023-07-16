@@ -1,6 +1,7 @@
 ;; Clock Widget
 (defwidget clock []
     (eventbox
+    :cursor "pointer"
     :onclick "eww open --toggle calendar${mainmonitor}"
     (box
         :class "clock"

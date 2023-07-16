@@ -5,12 +5,14 @@
         :class "workspaces"
         :orientation "v"
         (for workspace in {hyprland.workspaces}
+            (eventbox :cursor "pointer"
             (button 
                 :class "workspace-btn ${workspace.focused ? "active" : ""} ${workspace.occupied ? "occupied" : "empty"}"
                 :onclick "hyprctl dispatch workspace ${workspace.number}"
                 :valign "center"
                 :halign "center"
                 (label :class "icon" :text {workspace.focused ? "" :  workspace.occupied ? "" : ""}))
+            )
         )
     )
 )

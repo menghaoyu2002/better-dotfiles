@@ -9,7 +9,17 @@
         color: $green;
     }
 
+    .prev,.next{
+        &:hover {
+            color: $text-hover;
+        }
+    }
+
     .playpause {
         color: $lavendar;
+        &:hover {
+            color: $lavendar-hover;
+        }
     }
+
 }

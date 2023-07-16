@@ -5,3 +5,4 @@
 (include "./windows/leftbar.yuck")
 (include "./windows/powerconfirm.yuck")
 (include "./windows/calendar.yuck")
+(include "./windows/spotifymenu.yuck")
