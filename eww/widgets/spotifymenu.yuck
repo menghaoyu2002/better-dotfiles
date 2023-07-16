@@ -15,7 +15,7 @@
        :reveal true
        :class "spotifyvol"
        :value {spotify.volume * 100} 
-       :onchange "playerctl -p spotify volume 0.{}")
+       :onchange "playerctl -p spotify volume $(echo {} / 100 | bc -l)")
         (label 
             :halign "start"
             :valign "center"

@@ -12,6 +12,7 @@
 (defwidget spotify []
 (revealer :reveal {spotify.status != ""} :duration 300
     (eventbox 
+        :tooltip {spotify.title}
         :cursor "pointer"
         :onclick "eww open --toggle spotifymenu${mainmonitor}"
         (box :class "spotify" :orientation "v" 

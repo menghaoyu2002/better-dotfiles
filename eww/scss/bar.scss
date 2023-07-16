@@ -54,7 +54,7 @@
     .battery {
         .icon {
             font-size: 1.6rem;
-            padding-left: 8px;
+            padding-left: 7px;
         }
 
         .high {
@@ -71,6 +71,10 @@
 
         .charging {
             color: $green;
+        }
+
+        .batterypercentage {
+            font-size: 0.85rem;
         }
     }
 

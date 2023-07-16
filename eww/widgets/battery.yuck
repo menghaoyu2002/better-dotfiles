@@ -1,21 +1,36 @@
+(defvar showbatterypercentage false)
+
 (defwidget battery []
-    (box
-        :orientation "v"
-        :class "battery"
-        (label 
-            :tooltip "Battery: ${EWW_BATTERY.BAT0.capacity}%"
-            :class "icon 
-                    ${EWW_BATTERY.BAT0.capacity >= 60 ? "high" : EWW_BATTERY.BAT0.capacity >= 30 ? "med" : "low"} 
-                    ${EWW_BATTERY.BAT0.status == "Charging" ? "charging" : ""}" 
-            :text "${EWW_BATTERY.BAT0.status == "Charging" ? "󰂄" : 
-                    EWW_BATTERY.BAT0.capacity >= 90 ? "󰁹" : 
-                    EWW_BATTERY.BAT0.capacity >= 80 ? "󰂁" :
-                    EWW_BATTERY.BAT0.capacity >= 70 ? "󰂀" : 
-                    EWW_BATTERY.BAT0.capacity >= 60 ? "󰁿" : 
-                    EWW_BATTERY.BAT0.capacity >= 50 ? "󰁾" : 
-                    EWW_BATTERY.BAT0.capacity >= 40 ? "󰁽" : 
-                    EWW_BATTERY.BAT0.capacity >= 30 ? "󰁼" :
-                    EWW_BATTERY.BAT0.capacity >= 20 ? "󰁻" :
-                    EWW_BATTERY.BAT0.capacity >= 10 ? "󰁺" : "󰂎" }"
-        ))
+    (eventbox 
+        :onhover "eww update showbatterypercentage=true"
+        :onhoverlost "eww update showbatterypercentage=false"
+        (box
+            :space-evenly false
+            :orientation "v"
+            :halign "center"
+            :valign "center"
+            :class "battery"
+            (revealer
+                :reveal showbatterypercentage
+                :transition "slideup"
+                (label :class "batterypercentage" :text "${EWW_BATTERY.BAT0.capacity}%")
+            )
+            (label 
+                ;; :tooltip "Battery: ${EWW_BATTERY.BAT0.capacity}%"
+                :halign "center"
+                :class "icon 
+                        ${EWW_BATTERY.BAT0.capacity >= 60 ? "high" : EWW_BATTERY.BAT0.capacity >= 30 ? "med" : "low"} 
+                        ${EWW_BATTERY.BAT0.status == "Charging" ? "charging" : ""}" 
+                :text "${EWW_BATTERY.BAT0.status == "Charging" ? "󰂄" : 
+                        EWW_BATTERY.BAT0.capacity >= 90 ? "󰁹" : 
+                        EWW_BATTERY.BAT0.capacity >= 80 ? "󰂁" :
+                        EWW_BATTERY.BAT0.capacity >= 70 ? "󰂀" : 
+                        EWW_BATTERY.BAT0.capacity >= 60 ? "󰁿" : 
+                        EWW_BATTERY.BAT0.capacity >= 50 ? "󰁾" : 
+                        EWW_BATTERY.BAT0.capacity >= 40 ? "󰁽" : 
+                        EWW_BATTERY.BAT0.capacity >= 30 ? "󰁼" :
+                        EWW_BATTERY.BAT0.capacity >= 20 ? "󰁻" :
+                        EWW_BATTERY.BAT0.capacity >= 10 ? "󰁺" : "󰂎" }"
+            ))
+    )
 )
