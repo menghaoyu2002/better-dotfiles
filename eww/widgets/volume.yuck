@@ -1,4 +1,4 @@
-(defpoll volume :interval "1s" :initial 0.50 "wpctl get-volume @DEFAULT_SINK@ | awk '{print $2}'")
+(defpoll volume :interval "1s" :initial 0 "wpctl get-volume @DEFAULT_SINK@ | awk '{print $2}'")
 (defpoll volstatus :interval "1s" :initial "" "wpctl get-volume @DEFAULT_SINK@ | awk '{print $3}' | tr -d '[]'")
 (defvar showvolslider false)
 
@@ -6,7 +6,7 @@
     (button :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     (label 
         :class "icon volume" 
-        :text {volstatus == "MUTED" ? "󰝟" : 
+        :text {volstatus == "MUTED" || volume == '' ? "󰝟" : 
         volume >= 0.60 ? "" :
         volume >= 0.30 ? "" :
         volume > 0 ? "" : "󰝟"})
@@ -17,14 +17,14 @@
     (eventbox
         :cursor "pointer"
         :class "volume-container"
-        :tooltip "Volume: ${volstatus == "MUTED" ? "muted" : volume * 100 + "%"}"
+        :tooltip "Volume: ${volstatus == "MUTED" || volume == '' ? "muted" : volume * 100 + "%"}"
         :onhover "eww update showvolslider=true"
         :onhoverlost "eww update showvolslider=false"
         (box :orientation "v" :space-evenly false
         (slider
            :reveal showvolslider
            :class "volbar"
-           :value {volstatus == "MUTED" ? 0 : volume * 100} 
+           :value {volstatus == "MUTED" || volume == '' ? 0 : volume * 100} 
            :onchange "wpctl set-volume @DEFAULT_SINK@ {}%"
         )
         (volumebutton))

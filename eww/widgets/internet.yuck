@@ -5,7 +5,7 @@
 (defwidget internet []
     (label :class "icon internet"
         :tooltip connectionname
-        :text {connection == "down" ? "󰤭":
+        :text {connection == "down" || connectionstrength == '' ? "󰤭":
               connectionstrength >= 80 ? "󰤨" :
               connectionstrength >= 75 ? "󰤥" :
               connectionstrength >= 50 ? "󰤢" :

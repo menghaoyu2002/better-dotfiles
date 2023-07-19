@@ -13,6 +13,7 @@
             (revealer
                 :reveal showbatterypercentage
                 :transition "slideup"
+                :duration 200
                 (label :halign "center" :class "batterypercentage" :text "${EWW_BATTERY.BAT0.capacity}")
             )
             (label 

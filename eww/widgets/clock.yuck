@@ -1,14 +1,15 @@
 ;; Clock Widget
 (defwidget clock []
     (eventbox
+    :class "clock"
     :cursor "pointer"
     :onclick "eww open --toggle calendar${mainmonitor}"
     (box
-        :class "clock"
         :orientation "v"
         :space-evenly false
+        :class "clockcontainer"
         (label :text {formattime(EWW_TIME, "%H")})
         (dots :orientation "h" :dots "[1, 2]" :visible true)
-        (label :text {formattime(EWW_TIME, "%m")}))
+        (label :text {formattime(EWW_TIME, "%M")}))
     )
 )

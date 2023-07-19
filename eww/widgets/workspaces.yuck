@@ -11,7 +11,7 @@
                 :onclick "hyprctl dispatch workspace ${workspace.number}"
                 :valign "center"
                 :halign "center"
-                (label :class "icon" :text {workspace.focused ? "" :  workspace.occupied ? "" : ""}))
+                (label :class "icon" :text {workspace.focused ? "" : workspace.occupied ? "" : ""}))
             )
         )
     )

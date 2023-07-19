@@ -1,15 +1,14 @@
 (defvar showpoweroptions false)
-(defvar showconfirmmenu false)
 (defvar confirmactionname "")
 (defvar confirmaction "")
 
 (defwidget powerbutton [action icon label]
     (button 
         :class "powerbutton ${label}"
-        :onclick "eww open powerconfirm${mainmonitor} && eww update showpoweroptions=false && 
-                 ${label == "shutdown" || label == "reboot" || label == "logout" ? 
-                 'eww update showconfirmmenu=true && eww update confirmaction="${action}" && eww update confirmactionname="${label}"'
-                 : action}"
+        :timeout 3000
+        :onclick "${label == "shutdown" || label == "reboot" || label == "logout" ? 
+                 'eww update confirmaction="${action}" && eww update confirmactionname="${label}" && eww open powerconfirm${mainmonitor}'
+                 : action} && eww update showpoweroptions=false"
         ;; :tooltip label
         (label :class "icon" :text icon))
 )
@@ -46,20 +45,16 @@
 )
 
 (defwidget confirmmenu []
-    (revealer
-        :reveal showconfirmmenu
-        :duration 450
         (box :orientation "v" :class "confirmmenu"
         (label :class "confirmtext" :text "Are you sure you want to ${confirmactionname}?")
         (box
             (button 
                 :class "confirmbutton"
-                :onclick {confirmaction}
+                :onclick "eww close powerconfirm${mainmonitor} && ${confirmaction}"
                 (label :class "icon ${confirmactionname}":text {confirmactionname == "shutdown" ? "" :
                                       confirmactionname == "logout" ? "󰗽" :
                                       confirmactionname == "reboot" ? "" : ""}))
-            (button :class "confirmbutton" :onclick "eww update showconfirmmenu=false && eww close powerconfirm${mainmonitor}"
+            (button :class "confirmbutton" :onclick "eww close powerconfirm${mainmonitor}"
             (label :class "icon closeconfirm" :text "")))
         )
-    )
 )
