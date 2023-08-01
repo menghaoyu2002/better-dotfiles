@@ -1,0 +1,53 @@
+.batterymenu {
+    background-color: $bg;
+    font-size: 1rem;
+    font-family: Google Sans;
+    border-radius: 5px;
+    border: solid 1.3px transparentize($lavendar, 0.5);
+    padding: 0.2rem 1rem;
+
+
+    .percentage {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .icon {
+        font-size: 6.2rem;
+    }
+
+    .high {
+        color: $blue;
+    }
+
+    .med {
+        color: $yellow
+    }
+
+    .low {
+        color: $red
+    }
+
+    .charging {
+        color: $green;
+        padding-right: 25px;
+    }
+
+    .info {
+        margin-left: 15px;
+
+        .high {
+            color: $text;
+        }
+
+        .med {
+            color: $orange
+        }
+
+        .low {
+            color: $red
+        }
+
+        color: $text-hover;
+    }
+}

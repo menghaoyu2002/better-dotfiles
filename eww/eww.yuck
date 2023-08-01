@@ -6,3 +6,4 @@
 (include "./windows/powerconfirm.yuck")
 (include "./windows/calendar.yuck")
 (include "./windows/spotifymenu.yuck")
+(include "./windows/battery.yuck")

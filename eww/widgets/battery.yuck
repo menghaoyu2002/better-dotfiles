@@ -1,37 +1,54 @@
 (defvar showbatterypercentage false)
+(defpoll remainingtime :initial "" :interval "10s" "acpi -i | grep 'Battery 0:' | head -n 1 | awk -F ',' '{print $3}'")
+
+(defwidget batteryicon []
+    (label 
+        ;; :tooltip "Battery: ${EWW_BATTERY.BAT0.capacity}%"
+        :halign "center"
+        :class "icon 
+                ${EWW_BATTERY.BAT0.capacity >= 50 ? "high" : EWW_BATTERY.BAT0.capacity >= 30 ? "med" : "low"} 
+                ${EWW_BATTERY.BAT0.status == "Charging" ? "charging" : ""}" 
+        :text {EWW_BATTERY.BAT0.status == "Charging" ?
+                (EWW_BATTERY.BAT0.capacity >= 90 ? "󰂅" : 
+                EWW_BATTERY.BAT0.capacity >= 80 ? "󰂊" :
+                EWW_BATTERY.BAT0.capacity >= 70 ? "󰢞" : 
+                EWW_BATTERY.BAT0.capacity >= 60 ? "󰂉" : 
+                EWW_BATTERY.BAT0.capacity >= 50 ? "󰢝" : 
+                EWW_BATTERY.BAT0.capacity >= 40 ? "󰂈" : 
+                EWW_BATTERY.BAT0.capacity >= 30 ? "󰂇" :
+                EWW_BATTERY.BAT0.capacity >= 20 ? "󰂆" :
+                EWW_BATTERY.BAT0.capacity >= 10 ? "󰢜" : "󰢟")
+                : (EWW_BATTERY.BAT0.capacity >= 90 ? "󰁹" : 
+                EWW_BATTERY.BAT0.capacity >= 80 ? "󰂁" :
+                EWW_BATTERY.BAT0.capacity >= 70 ? "󰂀" : 
+                EWW_BATTERY.BAT0.capacity >= 60 ? "󰁿" : 
+                EWW_BATTERY.BAT0.capacity >= 50 ? "󰁾" : 
+                EWW_BATTERY.BAT0.capacity >= 40 ? "󰁽" : 
+                EWW_BATTERY.BAT0.capacity >= 30 ? "󰁼" :
+                EWW_BATTERY.BAT0.capacity >= 20 ? "󰁻" :
+                EWW_BATTERY.BAT0.capacity >= 10 ? "󰁺" : "󰂎")}
+))
 
 (defwidget battery []
-    (eventbox 
-        :onhover "eww update showbatterypercentage=true"
-        :onhoverlost "eww update showbatterypercentage=false"
-        (box
-            :space-evenly false
-            :orientation "v"
-            :halign "center"
-            :valign "center"
-            :class "battery"
-            (revealer
-                :reveal showbatterypercentage
-                :transition "slideup"
-                :duration 200
-                (label :halign "center" :class "batterypercentage" :text "${EWW_BATTERY.BAT0.capacity}")
-            )
-            (label 
-                ;; :tooltip "Battery: ${EWW_BATTERY.BAT0.capacity}%"
-                :halign "center"
-                :class "icon 
-                        ${EWW_BATTERY.BAT0.capacity >= 60 ? "high" : EWW_BATTERY.BAT0.capacity >= 30 ? "med" : "low"} 
-                        ${EWW_BATTERY.BAT0.status == "Charging" ? "charging" : ""}" 
-                :text "${EWW_BATTERY.BAT0.status == "Charging" ? "󰂄" : 
-                        EWW_BATTERY.BAT0.capacity >= 90 ? "󰁹" : 
-                        EWW_BATTERY.BAT0.capacity >= 80 ? "󰂁" :
-                        EWW_BATTERY.BAT0.capacity >= 70 ? "󰂀" : 
-                        EWW_BATTERY.BAT0.capacity >= 60 ? "󰁿" : 
-                        EWW_BATTERY.BAT0.capacity >= 50 ? "󰁾" : 
-                        EWW_BATTERY.BAT0.capacity >= 40 ? "󰁽" : 
-                        EWW_BATTERY.BAT0.capacity >= 30 ? "󰁼" :
-                        EWW_BATTERY.BAT0.capacity >= 20 ? "󰁻" :
-                        EWW_BATTERY.BAT0.capacity >= 10 ? "󰁺" : "󰂎" }"
-            ))
+    (eventbox
+        :onhover "eww open batterymenu${mainmonitor}"
+        :onhoverlost "eww close batterymenu${mainmonitor}"
+        :halign "center"
+        :valign "center"
+        :class "battery"
+        (batteryicon)
     )
 )
+
+(defwidget batterymenu []
+    (box :space-evenly false 
+        :class "batterymenu"
+        :valign "center"
+        (batteryicon)
+        (box :orientation "v" :class "info" :space-evenly false :valign "center"
+            (label :class "percentage ${EWW_BATTERY.BAT0.capacity >= 50 ? "high" : EWW_BATTERY.BAT0.capacity >= 30 ? "med" : "low"} 
+            " :halign "start" :text "${EWW_BATTERY.BAT0.capacity}%")
+            (label :class "status" :halign "start" :text {EWW_BATTERY.BAT0.status})
+            (label :visible {remainingtime != ""}:class "remainingtime" :halign "start" :text {remainingtime})
+    )
+))
