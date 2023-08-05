@@ -8,11 +8,11 @@ Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'numToStr/Comment.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvimdev/dashboard-nvim'
+Plug 'nvimdev/lspsaga.nvim'
 Plug 'RRethy/vim-illuminate'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 Plug 'neovim/nvim-lspconfig'
-Plug 'SmiteshP/nvim-navic'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
@@ -27,7 +27,7 @@ call plug#end()
 
 " set variables
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-set number
+set number relativenumber
 set ignorecase
 set smartcase
 
@@ -61,20 +61,16 @@ nnoremap <C-r>h <C-w>R
 nnoremap <C-r>e <C-w>x
 
 " Buffer navigation
-nnoremap <C-b>h :bp<CR>
-nnoremap <C-b>l :bn<CR>
-nnoremap <C-b>b :ls<CR>
-
-" Close buffer 
-nnoremap <C-b>x :bd<CR>
+nnoremap <C-w>h :bp<CR>
+nnoremap <C-w>l :bn<CR>
+nnoremap <C-w>x :bd<CR>
 
 " NERDTree Keybinds
-nnoremap <A-f> :NvimTreeToggle<CR>
 nnoremap <A-a> :NvimTreeFocus<CR>
 nnoremap <A-d> :NvimTreeClose<CR>
 
 " Telescope Keybinds
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <C-/> <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
@@ -85,7 +81,20 @@ nnoremap <leader>gc <cmd>Telescope git_commits<cr>
 nnoremap <leader>gb <cmd>Telescope git_bcommits<cr>
 
 " Clear highlight from search
-nnoremap <leader>/ :noh<cr>
+nnoremap <space>/ :noh<cr>
+
+
+" LSP keybinds
+nnoremap <silent>K :Lspsaga hover_doc<CR>
+nnoremap <leader>pd :Lspsaga peek_definition<CR>
+nnoremap <leader>rn :Lspsaga rename<CR>
+nnoremap <leader>o :Lspsaga outline<CR>
+nnoremap <leader>dw :Lspsaga show_workspace_diagnostics<CR>
+nnoremap <C-,> :Lspsaga show_buf_diagnostics<CR>
+nnoremap <leader>]d :Lspsaga diagnostic_jump_next<CR>
+nnoremap <leader>[d :Lkpsaga diagnostic_jump_prev<cr>
+nnoremap <C-.> :Lspsaga code_action<cr>
+nnoremap <A-p> :Lspsaga finder<cr>
 
 " one tab is four spaces, don't @ me
 set expandtab

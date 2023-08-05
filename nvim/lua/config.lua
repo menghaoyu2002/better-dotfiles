@@ -1,86 +1,35 @@
 -- Configure plugins
 vim.opt.termguicolors = true
 require("nvim-tree").setup()
-vim.api.nvim_create_autocmd({"QuitPre"}, {
+vim.api.nvim_create_autocmd({ "QuitPre" }, {
     callback = function() vim.cmd("NvimTreeClose") end,
 })
 require("bufferline").setup {}
 require('lualine').setup()
-local navic = require("nvim-navic")
-navic.setup {
-    icons = {
-        File          = "󰈙 ",
-        Module        = " ",
-        Namespace     = "󰌗 ",
-        Package       = " ",
-        Class         = "󰌗 ",
-        Method        = "󰆧 ",
-        Property      = " ",
-        Field         = " ",
-        Constructor   = " ",
-        Enum          = "󰕘",
-        Interface     = "󰕘",
-        Function      = "󰊕 ",
-        Variable      = "󰆧 ",
-        Constant      = "󰏿 ",
-        String        = "󰀬 ",
-        Number        = "󰎠 ",
-        Boolean       = "◩ ",
-        Array         = "󰅪 ",
-        Object        = "󰅩 ",
-        Key           = "󰌋 ",
-        Null          = "󰟢 ",
-        EnumMember    = " ",
-        Struct        = "󰌗 ",
-        Event         = " ",
-        Operator      = "󰆕 ",
-        TypeParameter = "󰊄 ",
-    },
-    lsp = {
-        auto_attach = true
-    }
-}
-
-require("lualine").setup({
-    sections = {
-        lualine_c = {
-            "navic",
-
-            -- Component specific options
-            color_correction = nil, -- Can be nil, "static" or "dynamic". This option is useful only when you have highlights enabled.
-                                    -- Many colorschemes don't define same backgroud for nvim-navic as their lualine statusline backgroud.
-                                    -- Setting it to "static" will perform a adjustment once when the component is being setup. This should
-                                    --   be enough when the lualine section isn't changing colors based on the mode.
-                                    -- Setting it to "dynamic" will keep updating the highlights according to the current modes colors for
-                                    --   the current section.
-
-            navic_opts = nil  -- lua table with same format as setup's option. All options except "lsp" options take effect when set here.
-        }
-    },
-})
-
+require("lualine").setup()
+require('lspsaga').setup({})
 require("mason").setup()
 require 'colorizer'.setup()
 require('Comment').setup()
 require('gitsigns').setup()
 require('dashboard').setup({
-  theme = 'hyper',
-  config = {
-    week_header = {
-      enable = true,
-    },
-    shortcut = {
-      { desc = '󰊳 update', group = '@property', action = 'lazy update', key = 'u' },
-      {
-        icon = ' ',
-        icon_hl = '@variable',
-        desc = 'files',
-        group = 'label',
-        action = 'Telescope find_files',
-        key = 'f',
-      },
-    },
-  }
+    theme = 'hyper',
+    config = {
+        week_header = {
+            enable = true,
+        },
+        shortcut = {
+            { desc = '󰊳 update', group = '@property', action = 'lazy update', key = 'u' },
+            {
+                icon = ' ',
+                icon_hl = '@variable',
+                desc = 'files',
+                group = 'label',
+                action = 'Telescope find_files',
+                key = 'f',
+            },
+        },
+    }
 })
 
 require("nvim-autopairs").setup {}
@@ -115,34 +64,63 @@ end)
 --   end)
 -- end
 
-require'nvim-treesitter.configs'.setup {
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+require 'nvim-treesitter.configs'.setup {
+    -- Install parsers synchronously (only applied to `ensure_installed`)
+    sync_install = false,
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+    -- Automatically install missing parsers when entering buffer
+    -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+    auto_install = true,
 
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
 }
 
 vim.g.coq_settings = {
-  auto_start = 'shut-up',
-  keymap = {
-      jump_to_mark = ''
-  }
+    auto_start = 'shut-up',
+    keymap = {
+        jump_to_mark = ''
+    }
 }
 
 -- LSP setup
-require 'lspconfig'.lua_ls.setup {}
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.tsserver.setup{}
-require'lspconfig'.cssls.setup{}
-require'lspconfig'.html.setup{}
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.clangd.setup{}
-require'lspconfig'.jsonls.setup{}
+local lspconfig = require('lspconfig')
 
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+        -- Enable completion triggered by <c-x><c-o>
+        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+        --
+        -- -- Buffer local mappings.
+        -- -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local opts = { buffer = ev.buf }
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+        vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+        vim.keymap.set('n', '<space>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opts)
+        vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+        vim.keymap.set('n', '<C-s>', function()
+            vim.lsp.buf.format { async = true }
+        end, opts)
+    end,
+})
+
+local servers = { 'lua_ls', 'gopls', 'tsserver', 'cssls', 'html', 'clangd', 'jsonls', 'rust_analyzer' }
+for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup(require('coq').lsp_ensure_capabilities({
+        -- on_attach = my_custom_on_attach,
+    }))
+end
