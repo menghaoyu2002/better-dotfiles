@@ -13,14 +13,14 @@ Plug 'RRethy/vim-illuminate'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpate'}
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 Plug 'windwp/nvim-autopairs'
 Plug 'folke/flash.nvim'
 Plug 'ggandor/leap.nvim'
-Plug 'tpope/vim-surround'
+Plug 'kylechui/nvim-surround'
 " Plug 'tpope/vim-fugitive'
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
@@ -43,6 +43,10 @@ inoremap <C-z> <C-o>u
 set splitbelow
 set splitright
 
+" Vertical motions
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 " Split navigation
 nnoremap <C-j> <C-W><C-j>
 nnoremap <C-k> <C-W><C-k>
@@ -61,9 +65,9 @@ nnoremap <C-r>h <C-w>R
 nnoremap <C-r>e <C-w>x
 
 " Buffer navigation
-nnoremap <C-w>h :bp<CR>
-nnoremap <C-w>l :bn<CR>
-nnoremap <C-w>x :bd<CR>
+nnoremap <C-A-h> :bp<CR>
+nnoremap <C-A-l> :bn<CR>
+nnoremap <C-A-x> :bd<CR>
 
 " NERDTree Keybinds
 nnoremap <A-a> :NvimTreeFocus<CR>
@@ -83,23 +87,17 @@ nnoremap <leader>gb <cmd>Telescope git_bcommits<cr>
 " Clear highlight from search
 nnoremap <space>/ :noh<cr>
 
-
 " LSP keybinds
 nnoremap <silent>K :Lspsaga hover_doc<CR>
-nnoremap <leader>pd :Lspsaga peek_definition<CR>
-nnoremap <leader>rn :Lspsaga rename<CR>
-nnoremap <leader>o :Lspsaga outline<CR>
-nnoremap <leader>dw :Lspsaga show_workspace_diagnostics<CR>
+nnoremap <C-k> :Lspsaga peek_definition<CR>
+nnoremap <A-r> :Lspsaga rename<CR>
+nnoremap <A-o> :Lspsaga outline<CR>
+nnoremap <C-A-,> :Lspsaga show_workspace_diagnostics<CR>
 nnoremap <C-,> :Lspsaga show_buf_diagnostics<CR>
-nnoremap <leader>]d :Lspsaga diagnostic_jump_next<CR>
-nnoremap <leader>[d :Lkpsaga diagnostic_jump_prev<cr>
+nnoremap ]d :Lspsaga diagnostic_jump_next<CR>
+nnoremap [d :Lspsaga diagnostic_jump_prev<cr>
 nnoremap <C-.> :Lspsaga code_action<cr>
-nnoremap <A-p> :Lspsaga finder<cr>
-
-" one tab is four spaces, don't @ me
-set expandtab
-set tabstop=4
-set shiftwidth=4
+nnoremap <A-f> :Lspsaga finder<cr>
 
 " set theme
 set termguicolors
