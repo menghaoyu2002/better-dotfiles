@@ -2,14 +2,14 @@ call plug#begin()
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+Plug 'akinsho/bufferline.nvim' 
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvimdev/dashboard-nvim'
 Plug 'RRethy/vim-illuminate'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
@@ -25,7 +25,6 @@ Plug 'L3MON4D3/LuaSnip'
 
 Plug 'windwp/nvim-autopairs'
 Plug 'folke/flash.nvim'
-Plug 'ggandor/leap.nvim'
 Plug 'kylechui/nvim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -121,6 +120,15 @@ augroup highlight_yank
 augroup END
 
 set pumheight=10
+
+" without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+vnoremap <C-p> "_dP
+
+" yank to clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
 
 " import lua config
 lua require("config")

@@ -68,7 +68,6 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -122,7 +121,6 @@ cmp.setup.cmdline(':', {
 })
 
 -- LSP setup
-
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(ev)
@@ -141,7 +139,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, opts)
         vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-        vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', function()
+        vim.keymap.set({ 'n', 'i', 'v', 's'}, '<C-s>', function()
             vim.lsp.buf.format { async = true }
         end, opts)
     end,
@@ -186,11 +184,6 @@ require 'nvim-treesitter.configs'.setup {
         additional_vim_regex_highlighting = false,
     },
 }
-
-local npairs = require('nvim-autopairs')
-npairs.setup({ map_bs = false, map_cr = false, check_ts = true })
-
-vim.opt.termguicolors = true
 
 require("nvim-tree").setup()
 vim.api.nvim_create_autocmd({ "QuitPre" }, {
