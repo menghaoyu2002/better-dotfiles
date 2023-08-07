@@ -4,24 +4,30 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'numToStr/Comment.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvimdev/dashboard-nvim'
-Plug 'nvimdev/lspsaga.nvim'
 Plug 'RRethy/vim-illuminate'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+Plug 'nvimdev/lspsaga.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpate'}
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'L3MON4D3/LuaSnip'
+
 Plug 'windwp/nvim-autopairs'
 Plug 'folke/flash.nvim'
 Plug 'ggandor/leap.nvim'
 Plug 'kylechui/nvim-surround'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
@@ -89,7 +95,7 @@ nnoremap <space>/ :noh<cr>
 
 " LSP keybinds
 nnoremap <silent>K :Lspsaga hover_doc<CR>
-nnoremap <C-k> :Lspsaga peek_definition<CR>
+nnoremap <A-k> :Lspsaga peek_definition<CR>
 nnoremap <A-r> :Lspsaga rename<CR>
 nnoremap <A-o> :Lspsaga outline<CR>
 nnoremap <C-A-,> :Lspsaga show_workspace_diagnostics<CR>
@@ -103,11 +109,18 @@ nnoremap <A-f> :Lspsaga finder<cr>
 set termguicolors
 colorscheme catppuccin
 
+" one tab is four spaces, don't @ me
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
 " highlight on yank
 augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=150})
 augroup END
+
+set pumheight=10
 
 " import lua config
 lua require("config")
