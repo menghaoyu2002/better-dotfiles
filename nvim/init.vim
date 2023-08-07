@@ -65,14 +65,14 @@ noremap <C-w><C-K> :res -5<CR>
 noremap <C-w><C-J> :res +5<CR>
 
 " Split rearranging
-nnoremap <C-r>l <C-w>r
-nnoremap <C-r>h <C-w>R
-nnoremap <C-r>e <C-w>x
+nnoremap <A-w>l <A-w>r
+nnoremap <A-w>h <A-w>R
+nnoremap <A-w>e <A-w>x
 
 " Buffer navigation
 nnoremap <C-A-h> :bp<CR>
 nnoremap <C-A-l> :bn<CR>
-nnoremap <C-A-x> :bd<CR>
+nnoremap <C-A-d> :bd<CR>
 
 " NERDTree Keybinds
 nnoremap <A-a> :NvimTreeFocus<CR>
@@ -94,7 +94,7 @@ nnoremap <space>/ :noh<cr>
 
 " LSP keybinds
 nnoremap <silent>K :Lspsaga hover_doc<CR>
-nnoremap <A-k> :Lspsaga peek_definition<CR>
+nnoremap <leader>k :Lspsaga peek_definition<CR>
 nnoremap <A-r> :Lspsaga rename<CR>
 nnoremap <A-o> :Lspsaga outline<CR>
 nnoremap <C-A-,> :Lspsaga show_workspace_diagnostics<CR>
@@ -103,6 +103,7 @@ nnoremap ]d :Lspsaga diagnostic_jump_next<CR>
 nnoremap [d :Lspsaga diagnostic_jump_prev<cr>
 nnoremap <C-.> :Lspsaga code_action<cr>
 nnoremap <A-f> :Lspsaga finder<cr>
+nnoremap <leader>t :Lspsaga term_toggle<cr>
 
 " set theme
 set termguicolors
