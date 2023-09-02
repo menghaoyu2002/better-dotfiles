@@ -55,7 +55,7 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<C-]>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
                 -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
@@ -68,7 +68,7 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        ["<C-[>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -139,13 +139,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, opts)
         vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-        vim.keymap.set({ 'n', 'i', 'v', 's'}, '<C-s>', function()
+        vim.keymap.set({ 'n', 'i', 'v', 's' }, '<C-s>', function()
             vim.lsp.buf.format { async = true }
         end, opts)
     end,
 })
 
-local servers = { 'lua_ls', 'gopls', 'tsserver', 'cssls', 'html', 'clangd', 'jsonls', 'rust_analyzer', 'eslint' }
+local servers = { 'lua_ls', 'gopls', 'tsserver', 'cssls', 'html', 'clangd', 'jsonls', 'rust_analyzer', 'eslint', 'zls' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 for _, lsp in ipairs(servers) do
     require('lspconfig')[lsp].setup {
@@ -204,7 +204,6 @@ require('lspsaga').setup({
     }
 })
 require("mason").setup()
-require('colorizer').setup()
 require('Comment').setup()
 require('gitsigns').setup()
 require('dashboard').setup({
@@ -227,14 +226,44 @@ require('dashboard').setup({
     }
 })
 
+require('telescope').setup {
+    defaults = {
+        layout_config = {
+            prompt_position = 'top',
+        },
+        sorting_strategy = 'ascending',
+    },
+    pickers = {
+        find_files = {
+            find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
+            layout_config = {
+                height = 0.70
+            }
+        }
+   }
+}
 
 require("flash").setup {
     search = {
-        mode = "regular"
+        mode = "search"
+    },
+    label = {
+        uppercase = false,
     },
     modes = {
+        search = {
+            enabled = false,
+        },
         char = {
             highlight = { backdrop = false }
+        },
+        treesitter = {
+            label = {
+                rainbow = {
+                    enabled = true,
+                    shade = 1,
+                }
+            }
         }
     }
 }

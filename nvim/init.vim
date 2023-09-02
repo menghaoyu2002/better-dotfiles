@@ -14,7 +14,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'nvimdev/lspsaga.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -26,8 +26,6 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'windwp/nvim-autopairs'
 Plug 'folke/flash.nvim'
 Plug 'kylechui/nvim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
 " set variables
