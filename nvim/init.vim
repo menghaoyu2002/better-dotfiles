@@ -10,6 +10,7 @@ Plug 'nvimdev/dashboard-nvim'
 Plug 'RRethy/vim-illuminate'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
@@ -26,6 +27,7 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'windwp/nvim-autopairs'
 Plug 'folke/flash.nvim'
 Plug 'kylechui/nvim-surround'
+" Plug 'github/copilot.vim'
 call plug#end()
 
 " set variables
@@ -77,7 +79,7 @@ nnoremap <A-a> :NvimTreeFocus<CR>
 nnoremap <A-d> :NvimTreeClose<CR>
 
 " Telescope Keybinds
-nnoremap <C-/> <cmd>Telescope find_files<cr>
+nnoremap <C-P> <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>

@@ -2,7 +2,7 @@ configuration {
     modi: "drun,combi,window";
     lines: 10;
     columns: 2;
-    font: "sans 15";
+    font: "google sans 16";
     bw: 0;
     location: 0;
     padding: 0;
@@ -27,7 +27,7 @@ configuration {
     display-windowcd: "";
     display-run: "";
     display-ssh: "";
-    display-drun: "";
+    display-drun: " ";
     display-combi: "";
     display-filebrowser: "󰉋";
     kb-remove-word-back: "Control+BackSpace,Alt+d,Alt+BackSpace";

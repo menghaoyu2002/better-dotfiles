@@ -145,7 +145,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end,
 })
 
-local servers = { 'lua_ls', 'gopls', 'tsserver', 'cssls', 'html', 'clangd', 'jsonls', 'rust_analyzer', 'eslint', 'zls' }
+local servers = { 'lua_ls', 'gopls', 'tsserver', 'cssls', 'html', 'clangd', 'jsonls', 'rust_analyzer', 'eslint', 'zls', 'hls' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 for _, lsp in ipairs(servers) do
     require('lspconfig')[lsp].setup {
@@ -185,7 +185,13 @@ require 'nvim-treesitter.configs'.setup {
     },
 }
 
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+    filters = {
+        dotfiles = false,
+        git_ignored = false,
+    },
+})
+
 vim.api.nvim_create_autocmd({ "QuitPre" }, {
     callback = function() vim.cmd("NvimTreeClose") end,
 })
@@ -195,7 +201,7 @@ require("bufferline").setup {}
 require('lualine').setup()
 require('lspsaga').setup({
     lightbulb = {
-        enable = true,
+        enable = false,
         sign = false,
         virtual_text = true
     },
@@ -204,7 +210,19 @@ require('lspsaga').setup({
     }
 })
 require("mason").setup()
+
+local comment_api = require('Comment.api')
+vim.keymap.set({ 'n', 'i' }, '<C-/>', comment_api.toggle.linewise.current)
+
+local esc = vim.api.nvim_replace_termcodes(
+    '<ESC>', true, false, true
+)
+vim.keymap.set({ 'x', 'v' }, '<C-/>', function()
+    vim.api.nvim_feedkeys(esc, 'nx', false)
+    comment_api.toggle.linewise(vim.fn.visualmode())
+end)
 require('Comment').setup()
+
 require('gitsigns').setup()
 require('dashboard').setup({
     theme = 'hyper',
@@ -213,7 +231,7 @@ require('dashboard').setup({
             enable = true,
         },
         shortcut = {
-            { desc = '󰊳 update', group = '@property', action = 'lazy update', key = 'u' },
+            { desc = '󰊳 update', group = '@property', action = 'PlugUpdate', key = 'u' },
             {
                 icon = ' ',
                 icon_hl = '@variable',
@@ -240,7 +258,7 @@ require('telescope').setup {
                 height = 0.70
             }
         }
-   }
+    }
 }
 
 require("flash").setup {
@@ -267,9 +285,9 @@ require("flash").setup {
         }
     }
 }
-vim.keymap.set('', 's', function()
+vim.keymap.set('n', 's', function()
     require("flash").jump()
 end)
-vim.keymap.set('', 'S', function()
+vim.keymap.set('n', 'S', function()
     require("flash").treesitter()
 end)
