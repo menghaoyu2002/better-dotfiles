@@ -16,6 +16,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'nvimdev/lspsaga.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'windwp/nvim-ts-autotag'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -27,7 +28,8 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'windwp/nvim-autopairs'
 Plug 'folke/flash.nvim'
 Plug 'kylechui/nvim-surround'
-" Plug 'github/copilot.vim'
+Plug 'nvimdev/guard.nvim'
+Plug 'nvimdev/guard-collection'
 call plug#end()
 
 " set variables
@@ -105,6 +107,16 @@ nnoremap <C-.> :Lspsaga code_action<cr>
 nnoremap <A-f> :Lspsaga finder<cr>
 nnoremap <leader>t :Lspsaga term_toggle<cr>
 
+nnoremap <c-s> :GuardFmt<CR>
+inoremap <c-s> <ESC>:GuardFmt<CR>
+vnoremap <c-s> <ESC>:GuardFmt<CR>
+
+nnoremap <A-n> G
+nnoremap <A-p> gg
+
+nnoremap H ^
+nnoremap L $
+
 " set theme
 set termguicolors
 colorscheme catppuccin
@@ -125,7 +137,7 @@ set pumheight=10
 " without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
-vnoremap <C-p> "_dP
+vnoremap <leader>p "_dP
 
 " yank to clipboard
 nnoremap <leader>y "+y

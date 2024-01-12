@@ -2,7 +2,7 @@
 
 eww daemon
 
-monitor=$(hyprctl monitors -j | jaq 'reverse' | jaq '.[0].id')    
+monitor=$(hyprctl monitors -j | jaq 'reverse' | jaq '.[0].id')
 eww update mainmonitor=${monitor}
 eww open bar${monitor}
 

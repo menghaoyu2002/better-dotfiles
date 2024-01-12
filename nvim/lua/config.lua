@@ -83,14 +83,7 @@ cmp.setup({
         { name = 'luasnip' }, -- For luasnip users.
     }, {
         { name = 'buffer' },
-    }),
-    formatting = {
-        format = function(_, vim_item)
-            vim_item.menu = nil
-            vim_item.kind = (cmp_kinds[vim_item.kind] or '') .. vim_item.kind
-            return vim_item
-        end,
-    },
+    })
 })
 
 -- Set configuration for specific filetype.
@@ -120,6 +113,18 @@ cmp.setup.cmdline(':', {
     })
 })
 
+local ft = require('guard.filetype')
+
+ft('typescript,javascript,typescriptreact'):fmt('prettier')
+-- Call setup() LAST!
+local gaurd = require('guard')
+gaurd.setup({
+    -- the only options for the setup function
+    fmt_on_save = true,
+    -- Use lsp if no formatter was defined for this filetype
+    lsp_as_default_formatter = true,
+})
+
 -- LSP setup
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -139,19 +144,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, opts)
         vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-        vim.keymap.set({ 'n', 'i', 'v', 's' }, '<C-s>', function()
-            vim.lsp.buf.format { async = true }
-        end, opts)
+        -- vim.keymap.set({ 'n', 'i', 'v', 's' }, '<C-s>', function()
+        --     vim.lsp.buf.format { async = true }
+        -- end, opts)
     end,
 })
 
-local servers = { 'lua_ls', 'gopls', 'tsserver', 'cssls', 'html', 'clangd', 'jsonls', 'rust_analyzer', 'eslint', 'zls', 'hls' }
+local servers = { 'lua_ls', 'gopls', 'tsserver', 'cssls', 'html', 'clangd', 'jsonls', 'rust_analyzer', 'eslint', 'zls',
+    'hls', 'tailwindcss' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 for _, lsp in ipairs(servers) do
     require('lspconfig')[lsp].setup {
         capabilities = capabilities
     }
 end
+
+-- clangd override to use correct offset encoding
+require('lspconfig').clangd.setup {
+    capabilities = capabilities,
+    cmd = {
+        "clangd",
+        "--offset-encoding=utf-16",
+    },
+}
 
 require("nvim-autopairs").setup {}
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
@@ -178,7 +193,12 @@ require 'nvim-treesitter.configs'.setup {
     -- Automatically install missing parsers when entering buffer
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
     auto_install = true,
-
+    autotag = {
+        enable = true,
+        enable_rename = true,
+        enable_close = true,
+        enable_close_on_slash = true,
+    },
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
