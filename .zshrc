@@ -19,16 +19,16 @@ export EDITOR="$VISUAL"
 export GROFF_NO_SGR=1
 
 ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
-ZVM_VI_ESCAPE_BINDKEY=0.01
-ZVM_KEYTIMEOUT=0.1
 ZVM_VI_EDITOR="$EDITOR"
-ZVM_INIT_MODE=sourcing
-zvm_after_init_commands+=("bindkey '^ ' autosuggest-accept")
+
+function init() {
+    bindkey '^ ' autosuggest-accept
+}
+zvm_after_init_commands+=(init)
 
 ZVM_VI_HIGHLIGHT_BACKGROUND=#A6ADC8
 ZVM_VI_HIGHLIGHT_FOREGROUND=#1E1E2E
 ZVM_VI_HIGHLIGHT_EXTRASTYLE=bold
-
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
