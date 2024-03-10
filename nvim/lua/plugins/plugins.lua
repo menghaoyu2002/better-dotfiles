@@ -8,19 +8,23 @@ return {
         "numToStr/Comment.nvim",
         config = true,
         keys = {
-            { '<C-/>', function() require('Comment.api').toggle.linewise.current() end, mode = { 'n', 'i' } },
             {
-                '<C-/>',
+                "<C-/>",
                 function()
-                    local esc = vim.api.nvim_replace_termcodes(
-                        '<ESC>', true, false, true
-                    )
-                    vim.api.nvim_feedkeys(esc, 'nx', false)
-                    require('Comment.api').toggle.linewise(vim.fn.visualmode())
+                    require("Comment.api").toggle.linewise.current()
                 end,
-                mode = { 'x', 'v' },
-            }
-        }
+                mode = { "n", "i" },
+            },
+            {
+                "<C-/>",
+                function()
+                    local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+                    vim.api.nvim_feedkeys(esc, "nx", false)
+                    require("Comment.api").toggle.linewise(vim.fn.visualmode())
+                end,
+                mode = { "x", "v" },
+            },
+        },
     },
     {
         "windwp/nvim-autopairs",
@@ -35,19 +39,18 @@ return {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.5",
         dependencies = { "nvim-lua/plenary.nvim" },
+        event = "VimEnter",
         keys = {
-            { "<C-P>", function()
-                require("telescope.builtin").find_files({
-                    cwd = require("telescope.utils")
-                        .buffer_dir()
-                })
-            end, "Find Files" },
-            { "<leader>fg", function()
-                require("telescope.builtin").live_grep({
-                    cwd = require("telescope.utils")
-                        .buffer_dir()
-                })
-            end, "Live Grep" },
+            {
+                "<C-P>",
+                function() require("telescope.builtin").find_files({}) end,
+                "Find Files",
+            },
+            {
+                "<leader>fg",
+                function() require("telescope.builtin").live_grep({}) end,
+                "Live Grep",
+            },
             { "<leader>fb", "<cmd>Telescope buffers<cr>" },
             { "<leader>fh", "<cmd>Telescope help_tags<cr>" },
             { "<leader>ft", "<cmd>Telescope treesitter<cr>" },
@@ -188,18 +191,17 @@ return {
             lightbulb = {
                 enable = false,
                 sign = false,
-                virtual_text = true
+                virtual_text = true,
             },
             ui = {
-                code_action = " "
-            }
-        }
+                code_action = " ",
+            },
+        },
     },
-
-    "windwp/nvim-ts-autotag",
-
+    { "windwp/nvim-ts-autotag", config = true },
     {
         "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
@@ -334,12 +336,22 @@ return {
         "folke/flash.nvim",
         config = true,
         keys = {
-            { 's', function() require("flash").jump() end },
-            { 'S', function() require("flash").treesitter() end },
+            {
+                "s",
+                function()
+                    require("flash").jump()
+                end,
+            },
+            {
+                "S",
+                function()
+                    require("flash").treesitter()
+                end,
+            },
         },
         opts = {
             search = {
-                mode = "search"
+                mode = "search",
             },
             label = {
                 uppercase = false,
@@ -349,25 +361,25 @@ return {
                     enabled = false,
                 },
                 char = {
-                    highlight = { backdrop = false }
+                    highlight = { backdrop = false },
                 },
                 treesitter = {
                     label = {
                         rainbow = {
                             enabled = true,
                             shade = 1,
-                        }
-                    }
-                }
-            }
-        }
+                        },
+                    },
+                },
+            },
+        },
     },
 
     {
         "kylechui/nvim-surround",
         version = "*", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
-        config = true
+        config = true,
     },
     {
         "nvimdev/guard.nvim",
@@ -398,9 +410,10 @@ return {
 
     {
         "sindrets/diffview.nvim",
+        config = true,
         keys = {
             { "<leader>do", ":DiffviewOpen<CR>" },
-            { "<leader>dc", ":DiffviewClose<CR>" }
-        }
+            { "<leader>dc", ":DiffviewClose<CR>" },
+        },
     },
 }

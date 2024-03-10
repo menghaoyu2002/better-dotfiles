@@ -1,0 +1,31 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": "30px",
+    "modules-left": [
+        "wlr/workspaces",
+        "wlr/mode"
+    ],
+    // "modules-center": ["hyprland/window"],
+    "modules-right": [
+        "battery",
+        "tray",
+        "clock"
+    ],
+    // "hyprland/window": {
+    //     "max-length": 50
+    // },
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "clock": {
+        "format-alt": "{:%a, %d. %b  %H:%M}"
+    }
+}
