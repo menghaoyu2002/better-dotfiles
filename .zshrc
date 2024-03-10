@@ -10,6 +10,8 @@ PROMPT_EOL_MARK=''
 # If you come from bash you might have to change your $PATH.
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$PATH:$HOME/.local/bin"
+export FLYCTL_INSTALL="/home/myu/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -18,13 +20,25 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export GROFF_NO_SGR=1
 
+
 ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
 ZVM_VI_EDITOR="$EDITOR"
 
 function init() {
     bindkey '^ ' autosuggest-accept
+    bindkey '\eOA' history-beginning-search-backward-end
+    bindkey '\e[A' history-beginning-search-backward-end
+    bindkey '^k' history-beginning-search-backward-end
+    bindkey '\eOB' history-beginning-search-forward-end
+    bindkey '\e[B' history-beginning-search-forward-end
+    bindkey '^j' history-beginning-search-forward-end
 }
 zvm_after_init_commands+=(init)
+
+function zvm_after_lazy_keybindings() {
+  bindkey -M vicmd 'L' end-of-line
+  bindkey -M vicmd 'H' beginning-of-line
+}
 
 ZVM_VI_HIGHLIGHT_BACKGROUND=#A6ADC8
 ZVM_VI_HIGHLIGHT_FOREGROUND=#1E1E2E
@@ -37,7 +51,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
 # Plugins
 plugins=(
-		# git
         zsh-vi-mode
 		zsh-autosuggestions
 		zsh-syntax-highlighting
@@ -45,13 +58,16 @@ plugins=(
 		command-not-found
 		colorize
 		common-aliases
-        # zsh-autocomplete 
 		)
 
 source $ZSH/oh-my-zsh.sh
 
 ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BEAM
 ZVM_READKEY_ENGINE=$ZVM_READKEY_ENGINE_ZLE
+
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
 
 # Keybinds
 bindkey "^H" backward-kill-word
@@ -79,3 +95,5 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
+export PATH=$PATH:/home/yum/.spicetify
