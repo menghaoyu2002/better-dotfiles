@@ -36,8 +36,18 @@ return {
         tag = "0.1.5",
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = {
-            { "<C-P>",      "<cmd>Telescope find_files<cr>" },
-            { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
+            { "<C-P>", function()
+                require("telescope.builtin").find_files({
+                    cwd = require("telescope.utils")
+                        .buffer_dir()
+                })
+            end, "Find Files" },
+            { "<leader>fg", function()
+                require("telescope.builtin").live_grep({
+                    cwd = require("telescope.utils")
+                        .buffer_dir()
+                })
+            end, "Live Grep" },
             { "<leader>fb", "<cmd>Telescope buffers<cr>" },
             { "<leader>fh", "<cmd>Telescope help_tags<cr>" },
             { "<leader>ft", "<cmd>Telescope treesitter<cr>" },
@@ -162,7 +172,7 @@ return {
         "nvimdev/lspsaga.nvim",
         config = true,
         keys = {
-            { "<silent>K", ":Lspsaga hover_doc<CR>" },
+            { "K",         ":Lspsaga hover_doc<CR>" },
             { "<leader>k", ":Lspsaga peek_definition<CR>" },
             { "<A-r>",     ":Lspsaga rename<CR>" },
             { "<A-o>",     ":Lspsaga outline<CR>" },
@@ -320,7 +330,6 @@ return {
         -- install jsregexp (optional!).
         build = "make install_jsregexp",
     },
-
     {
         "folke/flash.nvim",
         config = true,
