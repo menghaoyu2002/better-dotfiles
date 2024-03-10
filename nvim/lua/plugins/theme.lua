@@ -48,13 +48,15 @@ return {
                     enable = true,
                 },
                 shortcut = {
-                    { desc = "󰊳 update", group = "@property", action = "PlugUpdate", key = "u" },
+                    { desc = "󰊳 update", group = "@property", action = "Lazy update", key = "u" },
                     {
                         icon = " ",
                         icon_hl = "@variable",
                         desc = "files",
                         group = "label",
-                        action = "Telescope find_files",
+                        action = function ()
+                            require('telescope.builtin').find_files()
+                        end,
                         key = "f",
                     },
                 },
