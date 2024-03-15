@@ -10,6 +10,7 @@ return {
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
+        event = "VimEnter",
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
@@ -23,7 +24,10 @@ return {
                 git_ignored = false,
             },
         },
-        event = "VimEnter",
+        config = function()
+            require("nvim-tree").setup {}
+        end,
+        lazy = false
     },
     {
         "akinsho/bufferline.nvim",

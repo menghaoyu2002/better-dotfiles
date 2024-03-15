@@ -1,12 +1,52 @@
 return {
-    "RRethy/vim-illuminate",
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        build = ":Copilot auth",
+        event = "InsertEnter",
+        config = function()
+            require("copilot").setup({
+                panel = {
+                    enabled = true,
+                    auto_refresh = true,
+                },
+                suggestion = {
+                    enabled = true,
+                    -- use the built-in keymapping for "accept" (<M-l>)
+                    auto_trigger = true,
+                    accept = false, -- disable built-in keymapping
+                    keymap = {
+                        accept = "<M-tab>",
+                    }
+                },
+            })
+
+            -- hide copilot suggestions when cmp menu is open
+            -- to prevent odd behavior/garbled up suggestions
+            local cmp_status_ok, cmp = pcall(require, "cmp")
+            if cmp_status_ok then
+                cmp.event:on("menu_opened", function()
+                    vim.b.copilot_suggestion_hidden = true
+                end)
+
+                cmp.event:on("menu_closed", function()
+                    vim.b.copilot_suggestion_hidden = false
+                end)
+            end
+        end,
+    },
+    {
+        "RRethy/vim-illuminate",
+        event = "InsertEnter",
+    },
     {
         "lewis6991/gitsigns.nvim",
         config = true,
     },
     {
         "numToStr/Comment.nvim",
-        config = true,
+        event = "VeryLazy",
+        lazy = true,
         keys = {
             {
                 "<C-/>",
@@ -28,27 +68,30 @@ return {
     },
     {
         "windwp/nvim-autopairs",
-        event = "InsertEnter",
         config = true,
     },
     {
         "williamboman/mason.nvim",
+        lazy = false,
         config = true,
     },
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.5",
+        version = "^0.1.*",
         dependencies = { "nvim-lua/plenary.nvim" },
-        event = "VimEnter",
         keys = {
             {
                 "<C-P>",
-                function() require("telescope.builtin").find_files({}) end,
+                function()
+                    require("telescope.builtin").find_files({})
+                end,
                 "Find Files",
             },
             {
                 "<leader>fg",
-                function() require("telescope.builtin").live_grep({}) end,
+                function()
+                    require("telescope.builtin").live_grep({})
+                end,
                 "Live Grep",
             },
             { "<leader>fb", "<cmd>Telescope buffers<cr>" },
@@ -75,9 +118,7 @@ return {
                 },
             },
         },
-        config = true,
     },
-
     {
         "neovim/nvim-lspconfig",
         config = function()
@@ -173,7 +214,6 @@ return {
     },
     {
         "nvimdev/lspsaga.nvim",
-        config = true,
         keys = {
             { "K",         ":Lspsaga hover_doc<CR>" },
             { "<leader>k", ":Lspsaga peek_definition<CR>" },
@@ -410,10 +450,10 @@ return {
 
     {
         "sindrets/diffview.nvim",
-        config = true,
         keys = {
             { "<leader>do", ":DiffviewOpen<CR>" },
             { "<leader>dc", ":DiffviewClose<CR>" },
         },
+        event = "VeryLazy",
     },
 }
