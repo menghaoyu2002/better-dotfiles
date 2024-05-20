@@ -38,6 +38,7 @@ zvm_after_init_commands+=(init)
 function zvm_after_lazy_keybindings() {
   bindkey -M vicmd 'L' end-of-line
   bindkey -M vicmd 'H' beginning-of-line
+  bindkey -M vicmd 'dd' kill-whole-line
 }
 
 ZVM_VI_HIGHLIGHT_BACKGROUND=#A6ADC8

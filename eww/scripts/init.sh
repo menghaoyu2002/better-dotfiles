@@ -6,7 +6,7 @@ monitor=$(hyprctl monitors -j | jaq 'reverse' | jaq '.[0].id')
 eww update mainmonitor=${monitor}
 eww open bar${monitor}
 
-socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | while read -r line; do
+socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | while read -r line; do
     case ${line%>>*} in
     "monitorremoved")
     eww update mainmonitor=0

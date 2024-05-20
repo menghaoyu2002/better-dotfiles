@@ -336,3 +336,8 @@
     default_icon = ""
     highlight = "#b4befe"
     format = "<span size='larger'><b>%s</b></span>"
+
+[skip-rule] 
+    appname = blueman
+    summary = "Galaxy Buds2 Pro"
+    skip_display=true
