@@ -10,7 +10,7 @@ PROMPT_EOL_MARK=''
 # If you come from bash you might have to change your $PATH.
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$PATH:$HOME/.local/bin"
-export FLYCTL_INSTALL="/home/myu/.fly"
+export FLYCTL_INSTALL="/home/my/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
@@ -83,15 +83,15 @@ alias icat="kitty +kitten icat"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # bun completions
-[ -s "/home/myu/.bun/_bun" ] && source "/home/myu/.bun/_bun"
+[ -s "/home/my/.bun/_bun" ] && source "/home/my/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-[ -f "/home/myu/.ghcup/env" ] && source "/home/myu/.ghcup/env" # ghcup-env
+[ -f "/home/my/.ghcup/env" ] && source "/home/my/.ghcup/env" # ghcup-env
 
-export PNPM_HOME="/home/myu/.local/share/pnpm"
+export PNPM_HOME="/home/my/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

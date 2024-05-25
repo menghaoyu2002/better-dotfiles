@@ -79,6 +79,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		version = "^0.1.*",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		event = "VimEnter",
 		keys = {
 			{
 				"<C-P>",
@@ -254,6 +255,7 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
+			"onsails/lspkind-nvim",
 		},
 		config = function()
 			local luasnip = require("luasnip")
@@ -293,7 +295,18 @@ return {
 					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 			end
 
+			local lspkind = require("lspkind")
 			cmp.setup({
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol_text", -- Show both symbol and text
+						menu = cmp_kinds,
+						before = function(entry, vim_item)
+							vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
+							return vim_item
+						end,
+					}),
+				},
 				snippet = {
 					-- REQUIRED - you must specify a snippet engine
 					expand = function(args)
@@ -430,43 +443,72 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
-		opts = {},
+		-- enabled = false,
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
 		keys = {
 			{
 				"<c-s>",
 				function()
-					require("conform").format()
+					require("conform").format({ async = true })
 				end,
 			},
 			{
 				"<c-s>",
 				function()
-					require("conform").format()
+					require("conform").format({ async = true })
 				end,
 				mode = "i",
 			},
 			{
 				"<c-s>",
 				function()
-					require("conform").format()
+					require("conform").format({ async = true })
 				end,
 				mode = "v",
 			},
 		},
+		opts = {
+			notify_on_error = false,
+			formatters_by_ft = {
+				lua = { "stylua" },
+				javascript = { { "prettier" } },
+				typescript = { { "prettier" } },
+				go = { "gofmt" },
+				rust = { "rustfmt" },
+				-- ["*"] = { "codespell" },
+			},
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_fallback = true,
+			},
+		},
+	},
+	{
+		"nvimdev/guard.nvim",
+		dependencies = {
+			"nvimdev/guard-collection",
+		},
+		enabled = false,
+		keys = {
+			{ "<c-s>", "<cmd>GuardFmt<CR>" },
+			{ "<c-s>", "<ESC><cmd>GuardFmt<CR>", mode = "i" },
+			{ "<c-s>", "<ESC><cmd>GuardFmt<CR>", mode = "v" },
+		},
 		config = function()
-			require("conform").setup({
-				formatters_by_ft = {
-					lua = { "stylua" },
-					javascript = { { "prettier" } },
-					typescript = { { "prettier" } },
-					go = { "gofmt" },
-					rust = { "rustfmt" },
-					["*"] = { "codespell" },
-				},
-				format_on_save = {
-					timeout_ms = 500,
-					lsp_fallback = true,
-				},
+			local ft = require("guard.filetype")
+
+			ft("typescript,javascript,typescriptreact,graphql"):fmt("prettier")
+			ft("lua"):fmt("lsp"):append("stylua"):append("selene")
+			ft("go"):fmt("gofmt")
+			ft("sql"):fmt("sql-formatter")
+			ft("rust"):fmt("rustfmt"):lint("rustfmt")
+			ft("*"):lint("codespell")
+			require("guard").setup({
+				-- Choose to format on every write to a buffer
+				fmt_on_save = true,
+				-- Use lsp if no formatter was defined for this filetype
+				lsp_as_default_formatter = true,
 			})
 		end,
 	},
